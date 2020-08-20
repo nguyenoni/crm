@@ -1,0 +1,13 @@
+.box{
+    width: 50%;
+    margin: 0 auto;
+}
+
+.status-check{
+    color: #26a69a;
+    cursor: pointer;
+}
+.status-checked{
+    color: #f44336;
+    cursor: pointer;
+}

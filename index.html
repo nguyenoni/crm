@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CRM -Thái Hương</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0-beta/css/materialize.min.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0-beta/js/materialize.min.js"></script>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script> -->
+    <link rel="stylesheet" href="style.css">
+
+</head>
+
+<body>
+    <!-- Nav -->
+    <nav>
+        <div class="nav-wrapper">
+
+            <div class="container">
+                <ul id="nav-mobile" class="right hide-on-med-and-down">
+                    <li><a href="/">Home</a></li>
+                    <li><a href="#">File google Sheet</a></li>
+                    <li><a href="#">Logout</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container">
+        <h4>Danh sách khách hàng</h4>
+        <hr>
+        <div class="row">
+            <form class="col s12">
+                <div class="row">
+                    <div class="input-field col s3">
+                        <select >
+                          <option value="" disabled selected>Chọn loại tìm kiếm</option>
+                          <option value="1">Theo tên</option>
+                          <option value="2">Theo Mã Đơn Hàng</option>
+                          <option value="3">Theo số điện thoại</option>
+                        </select>
+                        <label>Loại tìm kiếm</label>
+                      </div>
+                    <div class="input-field col s6">
+                        <input placeholder="Nhập từ khóa" id="key_search" type="text" class="validate">
+                        <label for="key_search">Từ khóa tìm kiếm</label>
+                    </div>
+                    <div class="input-field col s3">
+                        <select>
+                          <option value="" disabled selected>Chọn trạng thái</option>
+                          <option value="1">Đã tạo đơn hàng</option>
+                          <option value="2">Chưa tạo đơn hàng</option>
+                    
+                        </select>
+                        <label>Lọc</label>
+                      </div>
+                </div>
+            </form>
+        </div>
+        <table>
+            <thead>
+                <tr>
+                    <th>STT</th>
+                    <th>Họ tên</th>
+                    <th>Số điện thoại</th>
+                    <th>Trạng thái</th>
+                    <th></th>
+                </tr>
+            </thead>
+
+            <tbody>
+                <tr>
+                    <td>1</td>
+                    <td>Nguyễn Oni</td>
+                    <td>0928696461</td>
+                    <td><i class="material-icons status-checked" title="Đã tạo đơn hàng">check_box</i></td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>2</td>
+                    <td>Nguyễn Oni 2</td>
+                    <td>0928696461</td>
+                    <td><i class="material-icons status-check" title="Chưa tạo đơn hàng">check_box</i></td>
+                    <td><a class="waves-effect waves-light btn"><i class="material-icons left">create</i>Tạo đơn
+                            hàng</a></td>
+                </tr>
+                <tr>
+                    <td>3</td>
+                    <td>Nguyễn Oni 2</td>
+                    <td>0928696461</td>
+                    <td><i class="material-icons status-check" title="Chưa tạo đơn hàng">check_box</i></td>
+                    <td><a class="waves-effect waves-light btn"><i class="material-icons left">create</i>Tạo đơn
+                            hàng</a></td>
+                </tr>
+            </tbody>
+            
+        </table>
+        <ul class="pagination">
+            <li class="disabled"><a href="#!"><i class="material-icons">chevron_left</i></a></li>
+            <li class="active"><a href="#!">1</a></li>
+            <li class="waves-effect"><a href="#!">2</a></li>
+            <li class="waves-effect"><a href="#!">3</a></li>
+            <li class="waves-effect"><a href="#!">4</a></li>
+            <li class="waves-effect"><a href="#!">5</a></li>
+            <li class="waves-effect"><a href="#!"><i class="material-icons">chevron_right</i></a></li>
+          </ul>
+    </div>
+    
+<script type="text/javascript" src="app.js"></script>
+</body>
+
+</html>
