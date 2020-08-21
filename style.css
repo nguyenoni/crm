@@ -15,6 +15,13 @@
 .create-new-bill-order{
   color: #7ecfc0;cursor: pointer;
 }
+.modal.modal-fixed-footer .modal-footer{
+  text-align: left;
+}
+/* modal */
+.modal{
+  max-height: 85%!important;
+}
 /* Loading */
 
 #loader-wrapper {
