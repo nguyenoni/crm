@@ -11,10 +11,14 @@
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script> -->
     <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://pagination.js.org/dist/2.1.5/pagination.css"/>
 
 </head>
 
 <body>
+    <div id="loader-wrapper">
+        <div id="loader"></div>
+    </div>
     <!-- Nav -->
     <nav>
         <div class="nav-wrapper">
@@ -71,45 +75,21 @@
                 </tr>
             </thead>
 
-            <tbody>
-                <tr>
-                    <td>1</td>
-                    <td>Nguyễn Oni</td>
-                    <td>0928696461</td>
-                    <td><i class="material-icons status-checked" title="Đã tạo đơn hàng">check_box</i></td>
-                    <td></td>
-                </tr>
-                <tr>
-                    <td>2</td>
-                    <td>Nguyễn Oni 2</td>
-                    <td>0928696461</td>
-                    <td><i class="material-icons status-check" title="Chưa tạo đơn hàng">check_box</i></td>
-                    <td><a class="waves-effect waves-light btn"><i class="material-icons left">create</i>Tạo đơn
-                            hàng</a></td>
-                </tr>
-                <tr>
-                    <td>3</td>
-                    <td>Nguyễn Oni 2</td>
-                    <td>0928696461</td>
-                    <td><i class="material-icons status-check" title="Chưa tạo đơn hàng">check_box</i></td>
-                    <td><a class="waves-effect waves-light btn"><i class="material-icons left">create</i>Tạo đơn
-                            hàng</a></td>
-                </tr>
+            <tbody id="table-list">
+               
             </tbody>
             
         </table>
-        <ul class="pagination">
-            <li class="disabled"><a href="#!"><i class="material-icons">chevron_left</i></a></li>
-            <li class="active"><a href="#!">1</a></li>
-            <li class="waves-effect"><a href="#!">2</a></li>
-            <li class="waves-effect"><a href="#!">3</a></li>
-            <li class="waves-effect"><a href="#!">4</a></li>
-            <li class="waves-effect"><a href="#!">5</a></li>
-            <li class="waves-effect"><a href="#!"><i class="material-icons">chevron_right</i></a></li>
+        <ul class="pagination" id="pagination">
+            
           </ul>
     </div>
+
+    <script src="https://pagination.js.org/dist/2.1.5/pagination.min.js"></script>
     
+
 <script type="text/javascript" src="app.js"></script>
+<script type="text/javascript" src="crm.js"></script>
 </body>
 
 </html>
