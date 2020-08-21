@@ -6,12 +6,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>CRM -Thái Hương</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0-beta/css/materialize.min.css">
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0-beta/js/materialize.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0-beta/js/materialize.min.js"></script>
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script> -->
     <link rel="stylesheet" href="style.css">
-    <link rel="stylesheet" href="https://pagination.js.org/dist/2.1.5/pagination.css"/>
+    <link rel="stylesheet" href="https://pagination.js.org/dist/2.1.5/pagination.css" />
 
 </head>
 
@@ -40,27 +40,27 @@
             <form class="col s12">
                 <div class="row">
                     <div class="input-field col s3">
-                        <select >
-                          <option value="" disabled selected>Chọn loại tìm kiếm</option>
-                          <option value="1">Theo tên</option>
-                          <option value="2">Theo Mã Đơn Hàng</option>
-                          <option value="3">Theo số điện thoại</option>
+                        <select class="type-search">
+                            <option value="" disabled selected>Chọn loại tìm kiếm</option>
+                            <option value="name_cus">Theo tên</option>
+                            <option value="order_id">Theo Mã Đơn Hàng</option>
+                            <option value="phone">Theo số điện thoại</option>
                         </select>
                         <label>Loại tìm kiếm</label>
-                      </div>
+                    </div>
                     <div class="input-field col s6">
                         <input placeholder="Nhập từ khóa" id="key_search" type="text" class="validate">
                         <label for="key_search">Từ khóa tìm kiếm</label>
                     </div>
                     <div class="input-field col s3">
                         <select>
-                          <option value="" disabled selected>Chọn trạng thái</option>
-                          <option value="1">Đã tạo đơn hàng</option>
-                          <option value="2">Chưa tạo đơn hàng</option>
-                    
+                            <option value="" disabled selected>Chọn trạng thái</option>
+                            <option value="1">Đã tạo đơn hàng</option>
+                            <option value="2">Chưa tạo đơn hàng</option>
+
                         </select>
                         <label>Lọc</label>
-                      </div>
+                    </div>
                 </div>
             </form>
         </div>
@@ -76,20 +76,20 @@
             </thead>
 
             <tbody id="table-list">
-               
+
             </tbody>
-            
+
         </table>
         <ul class="pagination" id="pagination">
-            
-          </ul>
+
+        </ul>
     </div>
 
     <script src="https://pagination.js.org/dist/2.1.5/pagination.min.js"></script>
-    
 
-<script type="text/javascript" src="app.js"></script>
-<script type="text/javascript" src="crm.js"></script>
+
+    <script type="text/javascript" src="app.js"></script>
+    <script type="text/javascript" src="crm.js"></script>
 </body>
 
 </html>
