@@ -1,12 +1,6 @@
 $(document).ready(function () {
-
-    // Fakes the loading setting a timeout
-    setTimeout(function () {
-        $('body').addClass('loaded');
-    }, 3500);
-
     // Function show data to client
-    function show_data_to_client(data){
+    function show_data_to_client(data) {
         console.log(data);
         if (data) {
             $('#pagination').pagination({
@@ -18,14 +12,18 @@ $(document).ready(function () {
                     // template method of yourself
                     var tbody = $('tbody').empty();
                     data.forEach((item, index) => {
-                        
+
                         let tr = `
                         <tr>
                             <td>${index}</td>
+                            <td>${item.id_customer}</td>
                             <td>${item.name}</td>
                             <td>${item.phone}</td>
-                            <td><i class="material-icons ${ item.status ? 'status-checked' : 'status-check'}" title="${item.status ? 'Đã tạo đơn hàng' : 'Chưa tạo đơn hàng'}">check_box</i></td>
-                            <td>${ item.status ? '' : '<a class="waves-effect waves-light btn"><i class="material-icons left">create</i>Tạo đơn hàng</a>'}</td>
+                            <td><i class="material-icons ${ item.status ? 'status-checked' : 'status-check'}" title="${item.status ? 'Đã tạo vận đơn' : 'Chưa tạo vận đơn'}">check_box</i></td>
+                            
+                            <td value="${item.id_customer}">${ item.status ? '' : '<a class="modal-trigger" href="#modal1"><i class="material-icons create-new-bill-order left" title="Tạo vận đơn">create</i></a>'} 
+                            <i class="material-icons edit-order " title="Chỉnh sửa đơn hàng">settings</i>
+                            <i class="material-icons delete-order " title="Xóa đơn hàng">delete</i> </td>
                         </tr>
                         
                         `;
@@ -39,22 +37,22 @@ $(document).ready(function () {
     // Function filter data
     function flter_data(keyword, type) {
         const data = JSON.parse(localStorage.getItem("data"));
-    //   console.log(data);
+        //   console.log(data);
         let jsonArr;
-        if(type !== ""){
+        if (type !== "") {
             // search filter follow name customer
-            if(type === "name_cus"){
+            if (type === "name_cus") {
                 jsonArr = data.filter(item => item.name === keyword)
-    
+
                 // jsonArr.push(obj);
             } // Search follow with Order ID
-            else if(type === "order_id"){
+            else if (type === "order_id") {
                 jsonArr = data.filter(item => item.id_customer === keyword)
- 
+
             } // Search follow with Phone
-            else{
+            else {
                 jsonArr = data.filter(item => item.phone === keyword)
-         
+
             }
         }
         // Call function show data to client
@@ -65,13 +63,13 @@ $(document).ready(function () {
     $('#key_search').keyup(e => {
         e.stopImmediatePropagation();
         let type_search = $('.type-search').find(":selected").val();
-        if(e.target.value !== ""){
+        if (e.target.value !== "") {
             flter_data(e.target.value, type_search);
         }
-        
+
     });
 
-    
+
 });
 // Base url
 const url = "https://script.google.com/macros/s/AKfycbwvWDwAkJu--B1sJfMS3jJSt2kKC2johynPPN9YxEtlXHuGAJl6/exec";
@@ -116,10 +114,14 @@ function load_data_to_front_end() {
                     let tr = `
                     <tr>
                         <td>${item.row}</td>
+                        <td>${item.id_customer}</td>
                         <td>${item.name}</td>
                         <td>${item.phone}</td>
-                        <td><i class="material-icons ${ item.status ? 'status-checked' : 'status-check'}" title="${item.status ? 'Đã tạo đơn hàng' : 'Chưa tạo đơn hàng'}">check_box</i></td>
-                        <td>${ item.status ? '' : '<a class="waves-effect waves-light btn"><i class="material-icons left">create</i>Tạo đơn hàng</a>'}</td>
+                        <td><i class="material-icons ${ item.status ? 'status-checked' : 'status-check'}" title="${item.status ? 'Đã tạo vận đơn' : 'Chưa tạo vận đơn'}">check_box</i></td>  
+                        <td value="${item.id_customer}">${ item.status ? '' : '<a class="modal-trigger" href="#modal1"><i class="material-icons create-new-bill-order left" title="Tạo vận đơn">create</i></a>'}  
+                        <i class="material-icons edit-order" title="Chỉnh sửa đơn hàng">settings</i>
+                        <i class="material-icons delete-order " title="Xóa đơn hàng">delete</i> </td>
+                        
                     </tr>
                     
                     `;
@@ -148,10 +150,13 @@ function first_load_data_to_front_end(data) {
                     let tr = `
                     <tr>
                         <td>${item.row}</td>
+                        <td>${item.id_customer}</td>
                         <td>${item.name}</td>
                         <td>${item.phone}</td>
-                        <td><i class="material-icons ${ item.status ? 'status-checked' : 'status-check'}" title="${item.status ? 'Đã tạo đơn hàng' : 'Chưa tạo đơn hàng'}">check_box</i></td>
-                        <td>${ item.status ? '' : '<a class="waves-effect waves-light btn"><i class="material-icons left">create</i>Tạo đơn hàng</a>'}</td>
+                        <td><i class="material-icons ${ item.status ? 'status-checked' : 'status-check'}" title="${item.status ? 'Đã vận đơn' : 'Chưa tạo vận đơn'}">check_box</i></td>
+                        <td value="${item.id_customer}">${ item.status ? '' : '<a class="modal-trigger" href="#modal1"><i  class="material-icons create-new-bill-order left" title="Tạo vận đơn">create</i></a>'}  
+                        <i class="material-icons " title="Chỉnh sửa đơn hàng">settings</i>
+                        <i class="material-icons " title="Xóa đơn hàng">delete</i> </td>
                     </tr>
                     
                     `;

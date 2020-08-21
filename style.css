@@ -11,7 +11,10 @@
     color: #f44336;
     cursor: pointer;
 }
-
+/* icon */
+.create-new-bill-order{
+  color: #7ecfc0;cursor: pointer;
+}
 /* Loading */
 
 #loader-wrapper {

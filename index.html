@@ -68,10 +68,11 @@
             <thead>
                 <tr>
                     <th>STT</th>
+                    <th>Mã đơn hàng</th>
                     <th>Họ tên</th>
                     <th>Số điện thoại</th>
                     <th>Trạng thái</th>
-                    <th></th>
+                    <th>Hành Động</th>
                 </tr>
             </thead>
 
@@ -84,6 +85,107 @@
 
         </ul>
     </div>
+    <div id="modal1" class="modal">
+        <div class="modal-content">
+            <h4>Tạo Vận Đơn</h4>
+            <div class="wrapper">
+                <div class="row">
+                    <form class="col s12">
+                        <div class="row">
+                            <div class="input-field col s6">
+                                <input placeholder="Placeholder" id="id-customer" type="text" class="validate">
+                                <label for="id-customer">Mã Đơn Hàng</label>
+                            </div>
+                            <div class="input-field col s6">
+                                <input id="name" type="text" class="validate">
+                                <label for="name">Tên khách hàng</label>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="input-field col s6">
+                                <input placeholder="Placeholder" id="phone" type="text" class="validate">
+                                <label for="phone">Số điện thoại</label>
+                            </div>
+                            <div class="input-field col s6">
+                                <input id="name-sale" type="text" class="validate">
+                                <label for="name-sale">Sale xử lý</label>
+                            </div>
+                        </div>
+                        <!-- Kênh trao đổi select box -->
+                        <div class="row">
+                            <div class="input-field col s6">
+                                <select class="type-search">
+                                    <option value="">Vui lòng chọn kênh trao đổi</option>
+                                    <option value="Comment">Comment</option>
+                                    <option value="Inbox">Inbox</option>
+                                    <option value="Gọi điện">Gọi điện</option>
+                                </select>
+                                <label>Tình trạng sale</label>
+                            </div>
+                            <div class="input-field col s6">
+                                <select class="type-search">
+                                    <option value="Đã xử lý xong">Đã xử lý xong</option>
+                                    <option value="Không nghe lần 1">Không nghe - lần 1</option>
+                                    <option value="Không nghe lần 2">Không nghe - lần 2</option>
+                                    <option value="Không nghe lần 3">Không nghe - lần 3</option>
+                                    <option value="Sai số">Sai số</option>
+                                    <option value="Hủy đơn hàng">Hủy đơn hàng</option>
+                                </select>
+                                <label>Tình trạng sale</label>
+                            </div>
+                        </div>
+<!-- số lượng select box -->
+                        <div class="row">
+                            <div class="input-field col s6">
+                                <select class="type-search">
+                                    <option value="1">1</option>
+                                    <option value="2">2</option>
+                                    <option value="3">3</option>
+                                    <option value="4">4</option>
+                                    <option value="5">5</option>
+                                </select>
+                                <label>Số lượng</label>
+                            </div>
+                            <div class="input-field col s6">
+                                <select class="type-search">
+                                    <option value="" disabled selected>Chọn phí ship</option>
+                                    <option value="20000">20000</option>
+                                    <option value="30000">30000</option>
+                                    <option value="40000">40000</option>
+                                    <option value="50000">50000</option>
+                                </select>
+                                <label>Phí ship</label>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="input-field col s6">
+                                <input placeholder="Placeholder" id="price" type="text" class="validate">
+                                <label for="price">Giá bán (1 sản phẩm)</label>
+                            </div>
+                            <div class="input-field col s6">
+                                <input id="note" type="text" class="validate">
+                                <label for="note">Ghi chú</label>
+                            </div>
+                        </div>
+                        
+                        <div class="row">
+                            <div class="input-field col s12">
+                                <input id="address" type="text" class="validate">
+                                <label for="address">Địa chỉ</label>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+
+            </div>
+        </div>
+        <div class="modal-footer">
+            <a href="#!" class=" waves-effect waves-green btn-flat">Lưu Đơn Hàng</a>
+            <a href="#!" class="modal-close waves-effect waves-red btn-flat">Đóng</a>
+        </div>
+    </div>
+
+
 
     <script src="https://pagination.js.org/dist/2.1.5/pagination.min.js"></script>
 
