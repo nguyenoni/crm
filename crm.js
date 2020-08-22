@@ -19,11 +19,11 @@ $(document).ready(function () {
                             <td>${item.id_customer}</td>
                             <td>${item.name}</td>
                             <td>${item.phone}</td>
-                            <td><i class="material-icons ${ item.status ? 'status-checked' : 'status-check'}" title="${item.status ? 'Đã tạo vận đơn' : 'Chưa tạo vận đơn'}">check_box</i></td>
+                            <td><i class="far fa-check-circle ${ item.status ? 'status-checked' : 'status-check'}" title="${item.status ? 'Đã tạo vận đơn' : 'Chưa tạo vận đơn'}"></i></td>
                             
-                            <td value="${item.id_customer}">${ item.status ? '' : '<a class="modal-trigger" href="#modal1"><i class="material-icons create-new-bill-order left" title="Tạo vận đơn">create</i></a>'} 
-                            <i class="material-icons edit-order " title="Chỉnh sửa đơn hàng">settings</i>
-                            <i class="material-icons delete-order " title="Xóa đơn hàng">delete</i> </td>
+                            <td value="${item.id_customer}">${ item.status ? '' : '<a data-toggle="modal" data-target="#exampleModal"><i class="fas fa-plus-circle create-new-bill-order left" title="Tạo vận đơn"></i></a>'} 
+                            <i class="fas fa-cog edit-order" title="Chỉnh sửa đơn hàng"></i>
+                            <i class="far fa-trash-alt delete-order " title="Xóa đơn hàng">delete</i> </td>
                         </tr>
                         
                         `;
@@ -34,7 +34,7 @@ $(document).ready(function () {
         }
 
     }
-    // Function filter data
+    // Function filter data search
     function flter_data(keyword, type) {
         const data = JSON.parse(localStorage.getItem("data"));
         //   console.log(data);
@@ -117,10 +117,10 @@ function load_data_to_front_end() {
                         <td>${item.id_customer}</td>
                         <td>${item.name}</td>
                         <td>${item.phone}</td>
-                        <td><i class="material-icons ${ item.status ? 'status-checked' : 'status-check'}" title="${item.status ? 'Đã tạo vận đơn' : 'Chưa tạo vận đơn'}">check_box</i></td>  
-                        <td value="${item.id_customer}">${ item.status ? '' : '<a class="modal-trigger" href="#modal1"><i class="material-icons create-new-bill-order left" title="Tạo vận đơn">create</i></a>'}  
-                        <i class="material-icons edit-order" title="Chỉnh sửa đơn hàng">settings</i>
-                        <i class="material-icons delete-order " title="Xóa đơn hàng">delete</i> </td>
+                        <td><i class="far fa-check-circle ${ item.status ? 'status-checked' : 'status-check'}" title="${item.status ? 'Đã tạo vận đơn' : 'Chưa tạo vận đơn'}"></i></td>  
+                        <td value="${item.id_customer}">${ item.status ? '' : '<a data-toggle="modal" data-target="#exampleModal"><i class="fas fa-plus-circle create-new-bill-order left" title="Tạo vận đơn"></i></a>'}  
+                        <i class="fas fa-cog edit-order" title="Chỉnh sửa đơn hàng"></i>
+                        <i class="far fa-trash-alt delete-order " title="Xóa đơn hàng">delete</i> </td>
                         
                     </tr>
                     
@@ -153,10 +153,10 @@ function first_load_data_to_front_end(data) {
                         <td>${item.id_customer}</td>
                         <td>${item.name}</td>
                         <td>${item.phone}</td>
-                        <td><i class="material-icons ${ item.status ? 'status-checked' : 'status-check'}" title="${item.status ? 'Đã vận đơn' : 'Chưa tạo vận đơn'}">check_box</i></td>
-                        <td value="${item.id_customer}">${ item.status ? '' : '<a class="modal-trigger" href="#modal1"><i  class="material-icons create-new-bill-order left" title="Tạo vận đơn">create</i></a>'}  
-                        <i class="material-icons " title="Chỉnh sửa đơn hàng">settings</i>
-                        <i class="material-icons " title="Xóa đơn hàng">delete</i> </td>
+                        <td><i class="far fa-check-circle ${ item.status ? 'status-checked' : 'status-check'}" title="${item.status ? 'Đã tạo vận đơn' : 'Chưa tạo vận đơn'}"></i></td>
+                        <td value="${item.id_customer}">${ item.status ? '' : '<a data-toggle="modal" data-target="#exampleModal"><i  class="fas fa-plus-circle create-new-bill-order left" title="Tạo vận đơn"></i></a>'}  
+                        <i class="fas fa-cog edit-order " title="Chỉnh sửa đơn hàng"></i>
+                        <i class="far fa-trash-alt delete-order " title="Xóa đơn hàng"></i> </td>
                     </tr>
                     
                     `;

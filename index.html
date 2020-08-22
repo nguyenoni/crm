@@ -5,13 +5,19 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>CRM -Thái Hương</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0-beta/css/materialize.min.css">
+    <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0-beta/css/materialize.min.css"> -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0-beta/js/materialize.min.js"></script>
-    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0-beta/js/materialize.min.js"></script>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet"> -->
     <!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script> -->
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="https://pagination.js.org/dist/2.1.5/pagination.css" />
+
+    <!-- Bootrap -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+        integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css"
+        integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous" />
 
 </head>
 
@@ -20,15 +26,28 @@
         <div id="loader"></div>
     </div>
     <!-- Nav -->
-    <nav>
-        <div class="nav-wrapper">
-
-            <div class="container">
-                <ul id="nav-mobile" class="right hide-on-med-and-down">
-                    <li><a href="/">Home</a></li>
-                    <li><a href="#">File google Sheet</a></li>
-                    <li><a href="#">Logout</a></li>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <div class="container">
+            <a class="navbar-brand" href="#">Navbar w/ text</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText"
+                aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarText">
+                <ul class="navbar-nav mr-auto">
+                    <li class="nav-item active">
+                        <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Features</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Pricing</a>
+                    </li>
                 </ul>
+                <span class="navbar-text">
+                    Navbar text with an inline element
+                </span>
             </div>
         </div>
     </nav>
@@ -64,15 +83,15 @@
                 </div>
             </form>
         </div>
-        <table>
+        <table class="table">
             <thead>
                 <tr>
-                    <th>STT</th>
-                    <th>Mã đơn hàng</th>
-                    <th>Họ tên</th>
-                    <th>Số điện thoại</th>
-                    <th>Trạng thái</th>
-                    <th>Hành Động</th>
+                    <th scope="col">STT</th>
+                    <th scope="col">Mã đơn hàng</th>
+                    <th scope="col">Họ tên</th>
+                    <th scope="col">Số điện thoại</th>
+                    <th scope="col">Trạng thái</th>
+                    <th scope="col">Hành Động</th>
                 </tr>
             </thead>
 
@@ -85,45 +104,60 @@
 
         </ul>
     </div>
-    <div id="modal1" class="modal modal-fixed-footer">
-        <div class="modal-content">
-            <h4>Tạo Vận Đơn</h4>
-            <div class="wrapper">
-                <div class="row">
-                    <form class="col s12">
+    <!-- Modal -->
+    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Tạo mới vận đơn</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="form">
                         <div class="row">
-                            <div class="input-field col s6">
-                                <input id="id-customer" type="text" class="validate">
-                                <label for="id-customer">Mã Đơn Hàng</label>
+                            <div class="col">
+                                <label for="code_order">Mã đơn hàng</label>
+                                <input type="text" class="form-control" value="" id="code_order"
+                                    placeholder="Mã đơn hàng" disabled>
                             </div>
-                            <div class="input-field col s6">
-                                <input id="name" type="text" class="validate">
-                                <label for="name">Tên khách hàng</label>
+                            <div class="col">
+                                <label for="customer">Tên khách hàng</label>
+                                <input type="text" class="form-control" value=" id="customer_name"
+                                    placeholder="Tên khách hàng">
                             </div>
                         </div>
+        
                         <div class="row">
-                            <div class="input-field col s6">
-                                <input  id="phone" type="text" class="validate">
+                            <div class="col">
                                 <label for="phone">Số điện thoại</label>
+                                <input type="text" class="form-control" value="" id="phone_number"
+                                    placeholder="Số điện thoại">
                             </div>
-                            <div class="input-field col s6">
-                                <input id="name-sale" type="text" class="validate">
-                                <label for="name-sale">Sale xử lý</label>
+                            <div class="col">
+                                <label for="name_sale">Sale xử lý</label>
+                                <input type="text" class="form-control" value="" id="name_sale">
                             </div>
+        
                         </div>
-                        <!-- Kênh trao đổi select box -->
+        
                         <div class="row">
-                            <div class="input-field col s6">
-                                <select class="type-search">
-                                    <option value="">Vui lòng chọn kênh trao đổi</option>
-                                    <option value="Comment">Comment</option>
+                            <div class="col">
+        
+                                <label for="kind_contact">Kênh trao đổi</label>
+                                <select class="form-control" id="kind_contact">
                                     <option value="Inbox">Inbox</option>
+                                    <option value="Comment">Comment</option>
                                     <option value="Gọi điện">Gọi điện</option>
                                 </select>
-                                <label>Tình trạng sale</label>
+        
                             </div>
-                            <div class="input-field col s6">
-                                <select class="type-search">
+                            <div class="col">
+        
+                                <label for="sale_status">Tình trạng sale</label>
+                                <select class="form-control" id="sale_status">
                                     <option value="Đã xử lý xong">Đã xử lý xong</option>
                                     <option value="Không nghe lần 1">Không nghe - lần 1</option>
                                     <option value="Không nghe lần 2">Không nghe - lần 2</option>
@@ -131,65 +165,84 @@
                                     <option value="Sai số">Sai số</option>
                                     <option value="Hủy đơn hàng">Hủy đơn hàng</option>
                                 </select>
-                                <label>Tình trạng sale</label>
                             </div>
                         </div>
-<!-- số lượng select box -->
                         <div class="row">
-                            <div class="input-field col s6">
-                                <select class="type-search">
+                            <div class="col">
+        
+                                <label for="quantity">Số lượng</label>
+                                <select class="form-control" id="quantity">
                                     <option value="1">1</option>
                                     <option value="2">2</option>
                                     <option value="3">3</option>
                                     <option value="4">4</option>
                                     <option value="5">5</option>
                                 </select>
-                                <label>Số lượng</label>
+        
                             </div>
-                            <div class="input-field col s6">
-                                <select class="type-search">
-                                    <option value="" disabled selected>Chọn phí ship</option>
+                            <div class="col">
+                                <label for="fee_ship">Phí ship</label>
+                                <select class="form-control" id="fee_ship">
                                     <option value="20000">20000</option>
                                     <option value="30000">30000</option>
                                     <option value="40000">40000</option>
                                     <option value="50000">50000</option>
                                 </select>
-                                <label>Phí ship</label>
+        
                             </div>
                         </div>
+        
                         <div class="row">
-                            <div class="input-field col s6">
-                                <input  id="price" type="text" class="validate">
+                            <div class="col">
                                 <label for="price">Giá bán (1 sản phẩm)</label>
+                                <input type="number" class="form-control" class="address" id="price">
                             </div>
-                            <div class="input-field col s6">
-                                <input id="note" type="text" class="validate">
+                            <!-- <div class="col">
+                                <label for="sum_money_order">Tổng tiền</label>
+                                <input type="number" class="form-control" class="note" id="sum_money_order" disabled>
+                            </div> -->
+                            <div class="col">
                                 <label for="note">Ghi chú</label>
+                                <input type="text" class="form-control" class="note" id="note">
                             </div>
+        
                         </div>
-                        
                         <div class="row">
-                            <div class="input-field col s12">
-                                <input id="address" type="text" class="validate">
+                            <div class="col">
                                 <label for="address">Địa chỉ</label>
+                                <input type="text" class="form-control" class="address" id="address">
                             </div>
+        
                         </div>
-                    </form>
+                        <div class="alert alert-dismissible show fade" role="alert">
+                            <span class="message"></span>
+        
+                        </div>
+          
+                    </div>
+        
                 </div>
-
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Đóng</button>
+                    <button type="button" class="btn btn-primary btn-save">Lưu lại</button>
+                </div>
             </div>
-        </div>
-        <div class="modal-footer">
-            <button class="btn waves-effect waves-light" type="submit" name="action">Submit
-                <i class="material-icons right">send</i>
-            </button>
-            <a href="#!" class="modal-close waves-effect waves-red btn-flat">Đóng</a>
         </div>
     </div>
 
 
 
+
+
     <script src="https://pagination.js.org/dist/2.1.5/pagination.min.js"></script>
+
+    <!-- Bootstrap -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+        integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+        crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+        integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+        crossorigin="anonymous"></script>
 
 
     <script type="text/javascript" src="app.js"></script>
