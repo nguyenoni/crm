@@ -15,7 +15,7 @@ $(document).ready(function(){
 });
 
 $('.btn-save').on("click", (e)=>{
-    e.preventDeafault();
+
     save_data(url_api, { answer: 42 })
     .then(data => {
       console.log(data); // JSON data parsed by `data.json()` call
