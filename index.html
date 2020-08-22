@@ -5,6 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>CRM -Thái Hương</title>
+    <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests"> 
     <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0-beta/css/materialize.min.css"> -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
     <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0-beta/js/materialize.min.js"></script>
@@ -120,12 +121,12 @@
                         <div class="row">
                             <div class="col">
                                 <label for="code_order">Mã đơn hàng</label>
-                                <input type="text" class="form-control" value="" id="code_order"
+                                <input type="text" disabled class="customer-id form-control" value="" id="code_order"
                                     placeholder="Mã đơn hàng" disabled>
                             </div>
                             <div class="col">
                                 <label for="customer">Tên khách hàng</label>
-                                <input type="text" class="form-control" value=" id="customer_name"
+                                <input type="text" class="customer-name form-control" value="" id="customer_name"
                                     placeholder="Tên khách hàng">
                             </div>
                         </div>
@@ -133,12 +134,12 @@
                         <div class="row">
                             <div class="col">
                                 <label for="phone">Số điện thoại</label>
-                                <input type="text" class="form-control" value="" id="phone_number"
+                                <input type="text" class="phone-number form-control" value="" id="phone_number"
                                     placeholder="Số điện thoại">
                             </div>
                             <div class="col">
                                 <label for="name_sale">Sale xử lý</label>
-                                <input type="text" class="form-control" value="" id="name_sale">
+                                <input type="text" class="name-sale form-control" value="" id="name_sale">
                             </div>
         
                         </div>
@@ -147,7 +148,7 @@
                             <div class="col">
         
                                 <label for="kind_contact">Kênh trao đổi</label>
-                                <select class="form-control" id="kind_contact">
+                                <select class="kind-contact form-control" id="kind_contact">
                                     <option value="Inbox">Inbox</option>
                                     <option value="Comment">Comment</option>
                                     <option value="Gọi điện">Gọi điện</option>
@@ -157,7 +158,7 @@
                             <div class="col">
         
                                 <label for="sale_status">Tình trạng sale</label>
-                                <select class="form-control" id="sale_status">
+                                <select class="sale-status form-control" id="sale_status">
                                     <option value="Đã xử lý xong">Đã xử lý xong</option>
                                     <option value="Không nghe lần 1">Không nghe - lần 1</option>
                                     <option value="Không nghe lần 2">Không nghe - lần 2</option>
@@ -171,7 +172,7 @@
                             <div class="col">
         
                                 <label for="quantity">Số lượng</label>
-                                <select class="form-control" id="quantity">
+                                <select class="quantity form-control" id="quantity">
                                     <option value="1">1</option>
                                     <option value="2">2</option>
                                     <option value="3">3</option>
@@ -182,7 +183,7 @@
                             </div>
                             <div class="col">
                                 <label for="fee_ship">Phí ship</label>
-                                <select class="form-control" id="fee_ship">
+                                <select class="fee-ship form-control" id="fee_ship">
                                     <option value="20000">20000</option>
                                     <option value="30000">30000</option>
                                     <option value="40000">40000</option>
@@ -195,7 +196,7 @@
                         <div class="row">
                             <div class="col">
                                 <label for="price">Giá bán (1 sản phẩm)</label>
-                                <input type="number" class="form-control" class="address" id="price">
+                                <input type="number" class="price form-control" class="address" id="price">
                             </div>
                             <!-- <div class="col">
                                 <label for="sum_money_order">Tổng tiền</label>
@@ -203,19 +204,20 @@
                             </div> -->
                             <div class="col">
                                 <label for="note">Ghi chú</label>
-                                <input type="text" class="form-control" class="note" id="note">
+                                <input type="text" class="note form-control" class="note" id="note">
                             </div>
         
                         </div>
                         <div class="row">
                             <div class="col">
                                 <label for="address">Địa chỉ</label>
-                                <input type="text" class="form-control" class="address" id="address">
+                                <input type="text" class="address form-control" class="address" id="address">
                             </div>
         
                         </div>
                         <div class="alert alert-dismissible show fade" role="alert">
                             <span class="message"></span>
+                            <input type="hidden" value="" class="row">
         
                         </div>
           

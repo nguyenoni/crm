@@ -3,6 +3,9 @@
     margin: 0 auto;
 }
 
+.alert,.btn-submit {
+    margin-top: 15px;
+}
 .status-check{
     color: #26a69a;
     cursor: pointer;

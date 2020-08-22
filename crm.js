@@ -21,7 +21,7 @@ $(document).ready(function () {
                             <td>${item.phone}</td>
                             <td><i class="far fa-check-circle ${ item.status ? 'status-checked' : 'status-check'}" title="${item.status ? 'Đã tạo vận đơn' : 'Chưa tạo vận đơn'}"></i></td>
                             
-                            <td value="${item.id_customer}">${ item.status ? '' : '<a data-toggle="modal" data-target="#exampleModal"><i class="fas fa-plus-circle create-new-bill-order left" title="Tạo vận đơn"></i></a>'} 
+                            <td value="${item.id_customer}"><a data-val="${item.id_customer}" data-toggle="modal" data-target="#exampleModal">${ item.status ? '' : '<i class="fas fa-plus-circle create-new-bill-order left" title="Tạo vận đơn"></i></a>'} 
                             <i class="fas fa-cog edit-order" title="Chỉnh sửa đơn hàng"></i>
                             <i class="far fa-trash-alt delete-order " title="Xóa đơn hàng">delete</i> </td>
                         </tr>
@@ -118,7 +118,7 @@ function load_data_to_front_end() {
                         <td>${item.name}</td>
                         <td>${item.phone}</td>
                         <td><i class="far fa-check-circle ${ item.status ? 'status-checked' : 'status-check'}" title="${item.status ? 'Đã tạo vận đơn' : 'Chưa tạo vận đơn'}"></i></td>  
-                        <td value="${item.id_customer}">${ item.status ? '' : '<a data-toggle="modal" data-target="#exampleModal"><i class="fas fa-plus-circle create-new-bill-order left" title="Tạo vận đơn"></i></a>'}  
+                        <td value="${item.id_customer}"> <a data-val="${item.id_customer}" data-toggle="modal" data-target="#exampleModal">${ item.status ? '' :'<i class="fas fa-plus-circle create-new-bill-order left" title="Tạo vận đơn"></i></a>'}  
                         <i class="fas fa-cog edit-order" title="Chỉnh sửa đơn hàng"></i>
                         <i class="far fa-trash-alt delete-order " title="Xóa đơn hàng">delete</i> </td>
                         
@@ -154,7 +154,7 @@ function first_load_data_to_front_end(data) {
                         <td>${item.name}</td>
                         <td>${item.phone}</td>
                         <td><i class="far fa-check-circle ${ item.status ? 'status-checked' : 'status-check'}" title="${item.status ? 'Đã tạo vận đơn' : 'Chưa tạo vận đơn'}"></i></td>
-                        <td value="${item.id_customer}">${ item.status ? '' : '<a data-toggle="modal" data-target="#exampleModal"><i  class="fas fa-plus-circle create-new-bill-order left" title="Tạo vận đơn"></i></a>'}  
+                        <td value="${item.id_customer}"><a data-val="${item.id_customer}" data-toggle="modal" data-target="#exampleModal">${ item.status ? '' : '<i  class="fas fa-plus-circle create-new-bill-order left" title="Tạo vận đơn"></i></a>'}  
                         <i class="fas fa-cog edit-order " title="Chỉnh sửa đơn hàng"></i>
                         <i class="far fa-trash-alt delete-order " title="Xóa đơn hàng"></i> </td>
                     </tr>
