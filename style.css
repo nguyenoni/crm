@@ -2,7 +2,12 @@
     width: 50%;
     margin: 0 auto;
 }
-
+.mg-bt{
+  margin-bottom: 30px;
+}
+.mg-top{
+  margin-top: 15px;
+}
 .alert,.btn-submit {
     margin-top: 15px;
 }
@@ -14,9 +19,18 @@
     color: #f44336;
     cursor: pointer;
 }
+.delete-order{
+  color: red;
+  cursor: pointer;
+}
+.edit-order{
+  color: #17a2b8;
+  cursor: pointer;
+}
+
 /* icon */
 .create-new-bill-order{
-  color: #7ecfc0;cursor: pointer;
+  color: #d94e0e;cursor: pointer;
 }
 .modal.modal-fixed-footer .modal-footer{
   text-align: left;
