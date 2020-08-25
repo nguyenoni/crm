@@ -1,14 +1,39 @@
 var sheet_name_get = "SALE_01";
-function doGet(e) {
+var sheet_name_order = "DONHANG";
+
+function get_data_order() {
+    const jsonArray = [];
+    const ss = SpreadsheetApp.getActiveSpreadsheet();
+    const ws = ss.getSheetByName(sheet_name_order);
+    const data_range = ws.getRange(1, 1, ws.getLastRow() - 1, 13).getValues();
+    const headers = data_range.shift();
+
+    for (var i = 0; i < data_range.length; i++) {
+        var r = data_range[i];
+        if (r[0] === "") {
+            break;
+        } else if (i !== 0) {
+            jsonArray.push({
+                row: i + 2, id: r[0], name_custumer: r[1], channel: r[2], status: r[3], quantity: r[4],
+                fee_ship: r[5], cash_order: r[6], sum_money: r[7], create_at: r[8], phone: r[9], address: r[10], note: r[11], who_make: r[12]
+            });
+        }
+    }
+
+    return jsonArray;
+
+}
+
+function get_data_customer() {
+    const jsonArray = [];
     const ss = SpreadsheetApp.getActiveSpreadsheet();
     const ws = ss.getSheetByName(sheet_name_get);
 
-    const data = ws.getRange("A3").getDataRegion().getValues();
-    const headers = data.shift();
-    const jsonArray = [];
+    const data_range = ws.getRange("A3").getDataRegion().getValues();
+    headers = data_range.shift();
 
-    for (var i = 0; i < data.length; i++) {
-        var r = data[i];
+    for (var i = 0; i < data_range.length; i++) {
+        var r = data_range[i];
         if (r[0] === "") {
             break;
         } else if (i !== 0) {
@@ -16,8 +41,52 @@ function doGet(e) {
         }
     }
 
-    const response = [{ status: 200, data: jsonArray }];
+    return jsonArray;
+
+}
+
+
+function doGet(e) {
+    const response = { status: 200, data: {} };
+    const ss = SpreadsheetApp.getActiveSpreadsheet();
+    const ws;
+    //    Data from client
+    const body = JSON.stringify(e.parameter.action);
+    const data = JSON.parse(body);
+
+
+    const dt = JSON.parse(body);
+    //action get bill order
+    if (data == "GET_BILL_ORDER") {
+        //        Function get data from sheet DONHANG
+        try {
+
+            //        const result_data_order = ; 
+            response.status = 200; response.data = get_data_order();
+        }
+        catch (e) {
+
+            response.status = 400;
+
+        }
+
+    }
+    else if (data == "GET_CUSTOMER") {
+        try {
+
+            //        const result_data_order = ; 
+            response.status = 200; response.data = get_data_customer();
+        }
+        catch (e) {
+
+            response.status = 400;
+
+        }
+
+    }
+
     return ContentService.createTextOutput(JSON.stringify(response)).setMimeType(ContentService.MimeType.JSON);
+    //    return ContentService.createTextOutput(body).setMimeType(ContentService.MimeType.JSON);
 }
 
 function change_status(row) {
@@ -29,13 +98,24 @@ function change_status(row) {
     sheet.getRange(range).setValue(true);
 }
 
-function delete_row(row) {
+function delete_row(row, sheet_name) {
     const ss = SpreadsheetApp.getActiveSpreadsheet();
-    const ws = ss.getSheetByName(sheet_name_get);
-    if (row) {
-        ws.deleteRow(row);
+    const ws;
+    if (sheet_name == "SALE_01") {
+        ws = ss.getSheetByName(sheet_name_get);
+        if (row) {
+            ws.deleteRow(row);
+
+        }
 
     }
+    else if (sheet_name == "DONHANG") {
+        ws = ss.getSheetByName(sheet_name_order);
+        if (row) {
+            ws.deleteRow(row)
+        }
+    }
+
 
 }
 
@@ -49,14 +129,17 @@ function update_data_order(dt, row) {
 
 
 }
+//
 
 
 function test() {
-    dt = [
-        ["DH009", "Nguyễn Thị Huyền", 1, "yeu cau", "0974492262", "Nguyễn Tiến Vượng", "Đã xử lý xong", "ghi chu", "8/24/2020, 3:46:40 PM"]
-    ]
-
-    update_data_order(dt, 1996);
+    //    dt = [
+    //        ["DH009", "Nguyễn Thị Huyền", 1, "yeu cau", "0974492262", "Nguyễn Tiến Vượng", "Đã xử lý xong", "ghi chu", "8/24/2020, 3:46:40 PM"]
+    //    ]
+    //
+    //    update_data_order(dt, 1996);
+    var result = get_data_customer();
+    Logger.log(result);
 }
 
 function doPost(e) {
@@ -89,7 +172,7 @@ function doPost(e) {
     else if (data.action == "DELETE") {
 
         try {
-            delete_row(data.row);
+            delete_row(data.row, sheet_name_get);
             response.status = 200; response.message = "Xóa đơn hàng thành công!";
 
         } catch (e) {
@@ -111,6 +194,19 @@ function doPost(e) {
             response.status = 400; response.message = "Lỗi, có vẻ như hệ thống đang gặp vấn đề nào đó!";
 
         }
+
+    }
+    else if (data.action == "DELET_ORDER") {
+        try {
+            delete_row(data.row, sheet_name_order);
+            response.status = 200; response.message = "Xóa đơn hàng thành công!";
+
+        } catch (e) {
+
+            response.status = 400; response.message = "Lỗi, có vẻ như hệ thống đang gặp vấn đề nào đó!";
+
+        }
+
 
     }
 

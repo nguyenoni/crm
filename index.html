@@ -11,7 +11,7 @@
     <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0-beta/js/materialize.min.js"></script>
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet"> -->
     <!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script> -->
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="https://pagination.js.org/dist/2.1.5/pagination.css" />
 
     <!-- Bootrap -->
@@ -40,7 +40,7 @@
                         <a class="nav-link" href="/">Khách Hàng <span class="sr-only">(current)</span></a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="/">Đơn Hàng (vận đơn)</a>
+                        <a class="nav-link" href="/list-bill.html">Đơn Hàng (vận đơn)</a>
                     </li>
            
                 </ul>
@@ -58,12 +58,10 @@
                     <div class="input-field col-md-3">
                         <label for="#type-search">Loại tìm kiếm</label>
                         <select class="type-search form-control" id="type-search" >
-                            <option value="" disabled selected>Chọn loại tìm kiếm</option>
                             <option value="name_cus">Theo tên</option>
                             <option value="order_id">Theo Mã Đơn Hàng</option>
                             <option value="phone">Theo số điện thoại</option>
                         </select>
-                        
                     </div>
                     <div class="input-field col-md-6">
                         <label for="key_search">Từ khóa tìm kiếm</label>
@@ -366,8 +364,8 @@
         crossorigin="anonymous"></script>
 
 
-    <script type="text/javascript" src="app.js"></script>
-    <script type="text/javascript" src="crm.js"></script>
+    <script type="text/javascript" src="js/app.js"></script>
+    <script type="text/javascript" src="js/crm.js"></script>
 </body>
 
 </html>

@@ -165,21 +165,46 @@ $(document).ready(function () {
 const url = "https://script.google.com/macros/s/AKfycbwvWDwAkJu--B1sJfMS3jJSt2kKC2johynPPN9YxEtlXHuGAJl6/exec";
 
 // Function get data from API
-async function get_data() {
-    await fetch(url, {})
-        .then(d => d.json())
-        .then(d => {
-            // load_data_to_front_end(d[0].data);
-            if (localStorage.getItem("data") === null) {
-                localStorage.setItem("data", JSON.stringify(d[0].data));
-            } else {
-                localStorage.removeItem("data");
-                localStorage.setItem("data", JSON.stringify(d[0].data));
+function get_data() {
+
+    let dt = {
+        action: "GET_CUSTOMER"
+    }
+
+    if (dt) {
+        $.ajax({
+            crossDomain: true,
+            url: url_api,
+            method: "GET",
+            dataType: "json",
+            data: dt,
+            success: function (data) {
+
+                if (data.status == 200) {
+
+                    if (localStorage.getItem("data") === null) {
+                        localStorage.setItem("data", JSON.stringify(data.data));
+                    } else {
+                        localStorage.removeItem("data");
+                        localStorage.setItem("data", JSON.stringify(data.data));
+                    }
+
+                    first_load_data_to_front_end(data.data);
+
+                }
+                else {
+                    // $('.alert').removeClass('hide');
+                    // $('.alert').removeClass('alert-success');
+                    // $('.alert').addClass('show alert-danger');
+                    // $('.message').text("");
+                    // $('.message').text(data.message);
+                    // $('input').val(null);
+                }
             }
 
-            first_load_data_to_front_end(d[0].data);
-
         });
+
+    }
 
 
 }
@@ -308,7 +333,7 @@ function do_action(data) {
     if (data) {
         $.ajax({
             type: 'POST',
-            url: url_api,
+            url: url,
             dataType: 'json',
             data: data,
             success: function (data) {
@@ -360,7 +385,7 @@ function filter_status(kind_status) {
 // Event change select filter data
 $('.filter-status').on('change', e => {
     let type_filter = $('.filter-status').find(":selected").val();
-    if (filter_status !== "") {
+    if (type_filter !== "") {
         filter_status(type_filter);
     }
 })
