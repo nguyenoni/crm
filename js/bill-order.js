@@ -22,11 +22,11 @@ function show_data_to_front_end(data, type_show) {
                             <td>${item.id}</td>
                             <td>${item.name_custumer}</td>
                             <td>${item.phone}</td>
-                            <td>${item.status}</td>
                             <td>${item.address}</td>
-                    
-                    <td><a  data-val="${item.id}" data-toggle="modal" data-target="#modal-edit-order"><i class="fas fa-cog edit-order " title="Chỉnh sửa đơn hàng"></i></a>
-                    <a  data-val="${item.row}" data-toggle="modal" data-target="#modal-confirm"><i class="far fa-trash-alt delete-order " title="Xóa đơn hàng"></i> </a></td>
+                            <td>${item.status_order}</td>
+                            <td>
+                            <a data-val="${item.row}" data-toggle="modal" data-target="#modal-edit-order"><i class="far fa-edit edit-order" title="Sửa trạng thái đơn hàng"></i> </a>
+                            </td>
                         </tr>
                         
                         `;
@@ -49,14 +49,14 @@ function show_data_to_front_end(data, type_show) {
                         let tr = `
                         <tr>
                             <td>${index + 1}</td>
-                            <td>${item.id}</td>
+                            <<td>${item.id}</td>
                             <td>${item.name_custumer}</td>
                             <td>${item.phone}</td>
-                            <td>${item.status}</td>
                             <td>${item.address}</td>
-                    
-                    <td><a  data-val="${item.id}" data-toggle="modal" data-target="#modal-edit-order"><i class="fas fa-cog edit-order " title="Chỉnh sửa đơn hàng"></i></a>
-                    <a  data-val="${item.row}" data-toggle="modal" data-target="#modal-confirm"><i class="far fa-trash-alt delete-order " title="Xóa đơn hàng"></i> </a></td>
+                            <td>${item.status_order}</td>
+                            <td>
+                            <a data-val="${item.row}" data-toggle="modal" data-target="#modal-edit-order"><i class="far fa-edit edit-order" title="Sửa trạng thái đơn hàng"></i> </a>
+                            </td>
                         </tr>
                         
                         `;
@@ -106,7 +106,7 @@ function load_data_from_server() {
                     }
 
                     show_data_to_front_end(data.data, "firs_load");
-
+                    $('.filter-status').val("").change();
                 }
                 else {
                     // $('.alert').removeClass('hide');
@@ -144,12 +144,12 @@ $('.filter-status').on("change", e => {
 })
 
 // Event delete
-$('.btn-accept-delete').on("click", function(e) {
+$('.btn-accept-delete').on("click", function (e) {
     e.preventDefault();
 
     let row = $('.row-delete').val();
 
-    if(row !== ""){
+    if (row !== "") {
         let dt = {
             action: "DELETE_ORDER",
             row: row
@@ -159,24 +159,34 @@ $('.btn-accept-delete').on("click", function(e) {
 
 });
 
-// Event update
+// Event update save
+$('.btn-save-edit').on("click", e => {
+    e.preventDefault();
+    if($('.row').val() !== ""){
+        const dt = {
+            row: $('.row').val(),
+            status: $('.status').find(":selected").val(),
+            action: "EDIT_STATUS_ORDER"
+        }
+        do_action(dt);
+    }
+    else{
+        alert("Lỗi, vui lòng bấm F5 để tải lại trang.");
+    }
+    
+
+});
+
+
+// Event modal update is open
 
 $('#modal-edit-order').on('show.bs.modal', function (event) {
-    const id = $(event.relatedTarget).data('val');
-    // set value to input form
+    const row = $(event.relatedTarget).data('val');
+    const data = JSON.parse(localStorage.getItem("data_order"));
+    let obj = data.filter(item => item.row === row);
 
-    let data_find = JSON.parse(localStorage.getItem("data_order"));
-    let obj = data_find.filter(item => item.id === id);
-  
-    $('.customer-id-edit').val(obj[0].id);
-    $('.customer-name-edit').val(obj[0].name_custumer);
-    $('.phone-number-edit').val(obj[0].phone);
-    $('.quantity').val(obj[0].quantity);
-    $('.channel').val(obj[0].channel).change();
-    $('.status').val(obj[0].status).change();
-    $('.fee-ship').val(obj[0].fee_ship);
-    $('.require').val()
-    $('.row').val(obj[0].row);
+    $('.row').val(row);
+    $('.status').val(obj[0].status_order).change();
 
 });
 
@@ -188,7 +198,7 @@ $("#modal-edit-order").on('hide.bs.modal', function () {
     $('.alert').removeClass('alert-success');
     $('.alert').removeClass('alert-danger');
     load_data_from_server();
-    
+
 
 });
 
@@ -242,22 +252,19 @@ function filter_status(type_filter) {
     let jsonArr;
     // trạng thái đã xử lý xong
     if (type_filter === "1") {
-        jsonArr = data.filter(item => item.status === "Đã xử lý xong");
+        jsonArr = data.filter(item => item.status_order === "Đã được xử lý");
     } //Không nghe lần 1
     else if (type_filter === "2") {
-        jsonArr = data.filter(item => item.status === "Không nghe lần 1");
+        jsonArr = data.filter(item => item.status_order === "Vận chuyển");
     }
     else if (type_filter === "3") {
-        jsonArr = data.filter(item => item.status === "Không nghe lần 2");
+        jsonArr = data.filter(item => item.status === "Hoàn lại");
     }
     else if (type_filter === "4") {
-        jsonArr = data.filter(item => item.status === "Không nghe lần 3");
+        jsonArr = data.filter(item => item.status === "Hoàn thành");
     }
     else if (type_filter === "5") {
-        jsonArr = data.filter(item => item.status === "Sai số");
-    }
-    else if (type_filter === "6") {
-        jsonArr = data.filter(item => item.status === "Hủy đơn hàng");
+        jsonArr = data.filter(item => item.status === "Bị hủy");
     }
     else {
         jsonArr = data;

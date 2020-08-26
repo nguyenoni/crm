@@ -72,12 +72,15 @@
                         <label>Lọc</label>
                         <select class="filter-status form-control">
                             <option value="" disabled selected>Chọn trạng thái</option>
-                            <option value="1">Đã xử lý xong</option>
-                            <option value="2">Không nghe - lần 1</option>
-                            <option value="3">Không nghe - lần 2</option>
-                            <option value="4">Không nghe - lần 3</option>
-                            <option value="5">Sai số</option>
-                            <option value="6">Hủy đơn hàng</option>
+
+                            <option value="" disabled>Chọn trạng thái</option>
+                            <option value="1" title="Đơn hàng xác nhận và đang đóng gói.">Đã được xử lý</option>
+                            <option value="2" title="Đơn hàng đang được vận chuyển đến địa chỉ khách.">Vận chuyển
+                            </option>
+                            <option value="3" title="Đơn hàng khách không nhận và hoàn lại.">Hoàn lại</option>
+                            <option value="4" title="Đơn hàng đã được giao thành công.">Hoàn thành</option>
+                            <option value="5" title="Đơn hàng bị hủy.">Bị hủy bỏ</option>
+
                         </select>
 
                     </div>
@@ -91,9 +94,9 @@
                     <th scope="col">Mã đơn hàng</th>
                     <th scope="col">Họ tên</th>
                     <th scope="col">Số điện thoại</th>
-                    <th scope="col">Trạng thái</th>
                     <th scope="col">Địa chỉ</th>
-                    <th scope="col">Hành Động</th>
+                    <th scope="col">Trạng thái vận đơn</th>
+                    <th scope="col">Hành động</th>
                 </tr>
             </thead>
 
@@ -111,7 +114,7 @@
 
 
     <!-- Modal xác nhận -->
-    <div class="modal fade" id="modal-confirm" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+    <!-- <div class="modal fade" id="modal-confirm" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
         aria-hidden="true">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
@@ -138,10 +141,10 @@
                 </div>
             </div>
         </div>
-    </div>
+    </div> -->
 
     <!-- Modal chỉnh sửa đơn hàng -->
-    <div class="modal fade" id="modal-edit-order" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+    <!-- <div class="modal fade" id="modal-edit-order" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
         aria-hidden="true">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
@@ -155,22 +158,22 @@
                     <div class="form">
                         <div class="row">
                             <div class="col">
-                                <label for="code_order_edit">Mã đơn hàng</label>
-                                <input type="text" disabled class="customer-id-edit form-control" value=""
-                                    id="code_order_edit" placeholder="Mã đơn hàng" disabled>
+                                <label for="order-id">Mã đơn hàng</label>
+                                <input type="text" disabled class="order-id form-control" value=""
+                                    id="order-id" placeholder="Mã đơn hàng" disabled>
                             </div>
                             <div class="col">
-                                <label for="customer_name_edit">Tên khách hàng</label>
-                                <input type="text" class="customer-name-edit form-control" value=""
-                                    id="customer_name_edit" placeholder="Tên khách hàng">
+                                <label for="name">Tên khách hàng</label>
+                                <input type="text" class="name form-control" value=""
+                                    id="name" placeholder="Tên khách hàng">
                             </div>
                         </div>
 
                         <div class="row">
                             <div class="col">
-                                <label for="phone_number_edit">Số điện thoại</label>
-                                <input type="text" class="phone-number-edit form-control" value=""
-                                    id="phone_number_edit" placeholder="Số điện thoại">
+                                <label for="phone">Số điện thoại</label>
+                                <input type="text" class="phone form-control" value=""
+                                    id="phone" placeholder="Số điện thoại">
                             </div>
                             <div class="col">
                                 <label for="quantity">Số lượng</label>
@@ -191,7 +194,7 @@
                             </div>
                             <div class="col">
 
-                                <label for="sale_status">Tình trạng sale</label>
+                                <label for="status">Tình trạng sale</label>
                                 <select class="status form-control" id="status">
                                     <option value="Đã xử lý xong">Đã xử lý xong</option>
                                     <option value="Không nghe lần 1">Không nghe - lần 1</option>
@@ -204,27 +207,77 @@
                         </div>
                       
                         <div class="row">
-
+                            <div class="col">
+                                <label for="price">Giá bán(1 sản phẩm)</label>
+                                <input type="text" class="price form-control" value="" id="price">
+                            </div>
                             <div class="col">
                                 <label for="fee_ship">Phí ship</label>
-                                <input type="number" class="form-control" value="" id="fee-ship">
-
+                                <input type="number" class="fee-ship form-control" value="" id="fee-ship">
                             </div>
+
+                        </div>
+                        <div class="row">
                             <div class="col">
-                                <label for="require-edit">Yêu cầu</label>
-                                <input type="text" class="require-edit form-control" value="" id="require-edit">
+                                <label for="require">Yêu cầu</label>
+                                <input type="text" class="require form-control" value="" id="require">
                             </div>
                         </div>
-
-
                         <div class="row">
-
-
+                           
                             <div class="col">
-                                <label for="note-edit">Địa chỉ</label>
-                                <input type="text" class="note-edit form-control" value="" id="note-edit">
+                                <label for="address">Địa chỉ</label>
+                                <input type="text" class="address form-control" value="" id="address">
                             </div>
 
+                        </div>
+                        <div class="alert alert-dismissible show fade" role="alert">
+                            <span class="message"></span>
+                            <input type="hidden" value="" class="row">
+
+                        </div>
+
+                    </div>
+
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Đóng</button>
+                    <button type="button" class="btn btn-primary btn-save-edit">Lưu lại</button>
+                </div>
+            </div>
+        </div>
+    </div> -->
+
+
+    <!-- End modal edit order -->
+    <div class="modal fade" id="modal-edit-order" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Chỉnh sửa trạng thái vận đơn</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="form">
+
+                        <div class="row">
+                            <div class="col">
+                                <label for="status">Trạng thái vận đơn</label>
+                                <select class="status form-control" id="status">
+                                    <option value="Đã được xử lý" title="Đơn hàng xác nhận và đang đóng gói.">Đã được xử
+                                        lý</option>
+                                    <option value="Vận chuyển" title="Đơn hàng đang được vận chuyển đến địa chỉ khách.">
+                                        Vận chuyển</option>
+                                    <option value="Hoàn lại" title="Đơn hàng khách không nhận và hoàn lại.">Hoàn lại
+                                    </option>
+                                    <option value="Hoàn thành" title="Đơn hàng đã được giao thành công.">Hoàn thành
+                                    </option>
+                                    <option value="Bị hủy bỏ" title="Đơn hàng bị hủy.">Bị hủy bỏ</option>
+                                </select>
+                            </div>
                         </div>
 
                         <div class="alert alert-dismissible show fade" role="alert">
@@ -243,10 +296,6 @@
             </div>
         </div>
     </div>
-
-
-    <!-- End modal edit order -->
-
 
     <script src="https://pagination.js.org/dist/2.1.5/pagination.min.js"></script>
 

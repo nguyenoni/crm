@@ -32,6 +32,7 @@ $(document).ready(function () {
                     });
                 }
             })
+            $('.filter-status').val("").change();
         }
 
     }
@@ -246,6 +247,7 @@ function load_data_to_front_end() {
                 });
             }
         })
+        $('.filter-status').val("").change();
     }
 
 }
@@ -282,6 +284,7 @@ function first_load_data_to_front_end(data) {
                 });
             }
         })
+        $('.filter-status').val("").change();
     }
 
 }
@@ -310,7 +313,8 @@ $('.btn-save').on("click", (e) => {
         note: $('.note').val(),
         email_user_edit: "anonymos@gmail.com",
         row: $('.row').val(),
-        action: "ADD"
+        action: "ADD",
+        status_order: "Đã được xử lý"
     }
 
     do_action(dt)
