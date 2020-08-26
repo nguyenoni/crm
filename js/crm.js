@@ -298,6 +298,7 @@ $('.btn-save').on("click", (e) => {
     let price = parseInt($('.price').val() === "" ? 0 : $('.price').val())
     let money_box = parseInt(price) * parseInt(quantity);
     let sum_money_order = money_box + fee_ship;
+    let user = JSON.parse(sessionStorage.getItem("user"));
     const dt = {
         customer_id: $('.customer-id').val(),
         customer_name: $('.customer-name').val(),
@@ -311,7 +312,7 @@ $('.btn-save').on("click", (e) => {
         phone_number: $('.phone-number').val(),
         address: $(".address").val(),
         note: $('.note').val(),
-        email_user_edit: "anonymos@gmail.com",
+        email_user_edit: user.email,
         row: $('.row').val(),
         action: "ADD",
         status_order: "Đã được xử lý"

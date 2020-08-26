@@ -18,5 +18,18 @@ $(document).ready(function () {
 
 });
 
+$().ready(function(){
+  let user = sessionStorage.getItem("user");
+  if(!user){
+    window.location.href = "https://nguyenoni.github.io/crm/login.html";
+  }
+  else{
+    $('.user_name').html(user.user);
+  }
+});
 
+$('.btn-logout').on("click", function(){
+  sessionStorage.removeItem("user");
+  window.location.href = "https://nguyenoni.github.io/crm/login.html";
+})
 
