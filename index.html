@@ -37,14 +37,14 @@
             <div class="collapse navbar-collapse" id="navbarText">
                 <ul class="navbar-nav mr-auto">
                     <li class="nav-item active">
-                        <a class="nav-link" href="https://nguyenoni.github.io/crm">Khách Hàng <span class="sr-only">(current)</span></a>
+                        <!-- <a class="nav-link" href="https://nguyenoni.github.io/crm">Khách Hàng <span class="sr-only">(current)</span></a> -->
+                        <a class="nav-link" href="/">Khách Hàng <span class="sr-only">(current)</span></a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="https://nguyenoni.github.io/crm/list-bill.html">Đơn Hàng (vận đơn)</a>
+                        <!-- <a class="nav-link" href="https://nguyenoni.github.io/crm/list-bill.html">Đơn Hàng (vận đơn)</a> -->
+                        <a class="nav-link" href="/list-bill.html">Đơn Hàng (vận đơn)</a>
                     </li>
 
-                    
-           
                 </ul>
                 <span class="navbar-text">
                     <a class="btn-logout nav-link">Đăng xuất</a>
@@ -55,7 +55,7 @@
     </nav>
 
     <div class="container">
-        <h4 class="mg-top">Danh sách khách hàng</h4>
+        <h4 class="mg-top title-customer"></h4>
         <hr>
         <div class="row mg-bt">
             <form class="col s12">
@@ -145,7 +145,7 @@
                             </div>
                             <div class="col">
                                 <label for="name_sale">Sale xử lý</label>
-                                <input type="text" class="name-sale form-control" value="" id="name_sale">
+                                <input type="text" class="name-sale form-control" value="" id="name_sale" disabled>
                             </div>
 
                         </div>
@@ -301,7 +301,7 @@
                             </div>
                             <div class="col">
                                 <label for="name_sale_edit">Sale xử lý</label>
-                                <input type="text" class="name-sale-edit form-control" value="" id="name_sale_edit">
+                                <input type="text" class="name-sale-edit form-control" value="" id="name_sale_edit" disabled>
                             </div>
 
                         </div>

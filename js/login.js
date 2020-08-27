@@ -2,19 +2,29 @@
 const url_api = "https://script.google.com/macros/s/AKfycbwvWDwAkJu--B1sJfMS3jJSt2kKC2johynPPN9YxEtlXHuGAJl6/exec";
 
 // Event click login
-$('.btn-login').on("click", function(){
+$('.btn-login').on("click", function () {
 
     let user_name = $('#username').val();
     let password = $('#password').val();
     let user = sessionStorage.getItem("user")
 
-    if(user_name ===""){
-        
+    if (user_name === "") {
+        $('.alert').removeClass('hide');
+        $('.alert').removeClass('alert-success');
+        $('.alert').addClass('show alert-danger');
+        $('.message').text("");
+        $('.message').text("Vui lòng nhập username!");
+        $('input').val(null);
     }
-    else if(password === ""){
-        
+    else if (password === "") {
+        $('.alert').removeClass('hide');
+        $('.alert').removeClass('alert-success');
+        $('.alert').addClass('show alert-danger');
+        $('.message').text("");
+        $('.message').text("Vui lòng nhập vào mật khẩu!");
+        $('input').val(null);
     }
-    else{
+    else {
         let dt = {
             action: "LOGIN",
             password: password,
@@ -38,7 +48,8 @@ function do_action(dt) {
                 if (data.status == 200) {
                     sessionStorage.removeItem("user");
                     sessionStorage.setItem("user", JSON.stringify(data.user));
-                    window.location.href = "https://nguyenoni.github.io/crm/";
+                    // window.location.href = "https://nguyenoni.github.io/crm/";
+                    window.location.href = "/";
                 }
                 else {
                     $('.alert').removeClass('hide');

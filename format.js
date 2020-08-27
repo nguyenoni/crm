@@ -25,7 +25,7 @@ function get_data_order() {
 
 }
 
-function get_data_customer() {
+function get_data_customer(full_name) {
     const jsonArray = [];
     const ss = SpreadsheetApp.getActiveSpreadsheet();
     const ws = ss.getSheetByName(sheet_name_get);
@@ -37,7 +37,7 @@ function get_data_customer() {
         var r = data_range[i];
         if (r[0] === "") {
             break;
-        } else if (i !== 0) {
+        } else if (i !== 0 && r[7] == full_name) {
             jsonArray.push({ row: r[0], date: r[1], id_customer: r[2], name: r[3], quantity: r[4], require: r[5], phone: r[6], name_sale_process: r[7], status_sale: r[8], note: r[9], creat_at: r[10], status: r[11] });
         }
     }
@@ -52,13 +52,13 @@ function doGet(e) {
     const ss = SpreadsheetApp.getActiveSpreadsheet();
     const ws;
     //    Data from client
-    const body = JSON.stringify(e.parameter.action);
+    const body = JSON.stringify(e.parameter);
     const data = JSON.parse(body);
 
 
     const dt = JSON.parse(body);
     //action get bill order
-    if (data == "GET_BILL_ORDER") {
+    if (data.action == "GET_BILL_ORDER") {
         //        Function get data from sheet DONHANG
         try {
 
@@ -72,11 +72,11 @@ function doGet(e) {
         }
 
     }
-    else if (data == "GET_CUSTOMER") {
+    else if (data.action == "GET_CUSTOMER") {
         try {
 
             //        const result_data_order = ; 
-            response.status = 200; response.data = get_data_customer();
+            response.status = 200; response.data = get_data_customer(data.full_name);
         }
         catch (e) {
 
@@ -161,13 +161,14 @@ function test() {
     //    ]
     //
     //    update_data_order(dt, 1996);
-    //    var result = get_data_customer();
+    //    var a = get_data_customer("Nguyễn Oni");
     //    delete_row(14,sheet_name_order);
     //    Logger.log(result);
     //change_status_order(12, "Hoàn thành")
     //const a = decode_password("VG9pZGljb2RlZEAw");
-    //const a = encode_password("Toidicoded@0");
-    const a = check_user_login("nguyenoni", "Toidicoded@00");
+    //const a = encode_password("linhhuong@123");
+    const a = check_user_login("ngocch", "linhhuong@123");
+
 
     Logger.log(a);
 }
@@ -175,24 +176,24 @@ function test() {
 function check_user_login(u, p) {
     const sheetActive = SpreadsheetApp.getActiveSpreadsheet();
     const sheet = sheetActive.getSheetByName('USER');
-    const range = sheet.getRange(1, 1, sheet.getLastRow(), 3).getValues();
-    const res = { status: 200, message: "" };
+    const range = sheet.getRange(2, 1, sheet.getLastRow() - 1, 4).getValues();
+    const rs = { status: 200, message: "", user: {} };
+    //    range = range.shift();
     for (var i = 0; i < range.length; i++) {
-        var r = range[i];
-        if (r[0] == u) {
-            if (r[1] == endcode_password(p)) {
-                const obj = { user: r[0], email: r[2] }
-                res.status = 200; res.message = "ok"; res.user = obj;
-            }
-            else {
-                res.status = 400; res.message = "Mật khẩu không đúng, vui lòng thử lại!";
-            }
+        const r = range[i];
+        if (r[0] == u && r.includes(encode_password(p).toString())) {
+
+            const obj = { user: r[0], email: r[2] };
+            rs.status = 200; rs.message = "ok"; rs.user = { user: r[0], email: r[2], full_name: r[3] };
+            break;
+
+
         }
 
 
     }
 
-    return res;
+    return rs;
 }
 
 function doPost(e) {
@@ -279,7 +280,7 @@ function doPost(e) {
         try {
 
             var res = check_user_login(data.user_name, data.password);
-            response.status = 200; response.message = "Cập nhật trạng thái vận đơn thành công!";
+            response.status = res.status; response.message = res.message; response.user = res.user;
 
         } catch (e) {
 

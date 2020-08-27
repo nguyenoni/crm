@@ -19,17 +19,22 @@ $(document).ready(function () {
 });
 
 $().ready(function(){
-  let user = sessionStorage.getItem("user");
+  let user = JSON.parse(sessionStorage.getItem("user"));
   if(!user){
-    window.location.href = "https://nguyenoni.github.io/crm/login.html";
+    // window.location.href = "https://nguyenoni.github.io/crm/login.html";
+    window.location.href = "/login.html";
   }
   else{
-    $('.user_name').html(user.user);
+    // $('.user_name').html(user.user);
+    $('.title-customer').text("Danh sách khách hàng của "+user.full_name);
+    $('.title-order').text("Danh sách vận đơn của "+user.full_name);
   }
 });
 
 $('.btn-logout').on("click", function(){
   sessionStorage.removeItem("user");
-  window.location.href = "https://nguyenoni.github.io/crm/login.html";
+  // window.location.href = "https://nguyenoni.github.io/crm/login.html";
+  window.location.href = "/login.html";
 })
+
 

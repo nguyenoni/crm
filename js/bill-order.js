@@ -83,8 +83,10 @@ function show_data_to_front_end(data, type_show) {
 
 // Get data from sheet bill order
 function load_data_from_server() {
+    let user = JSON.parse(sessionStorage.getItem("user"));
     let dt = {
-        action: "GET_BILL_ORDER"
+        action: "GET_BILL_ORDER",
+        email: user.email
     }
 
     if (dt) {

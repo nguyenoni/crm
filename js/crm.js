@@ -1,175 +1,158 @@
-$(document).ready(function () {
-    // Function show data to client
-    function show_data_to_client(data) {
-        if (data) {
-            $('#pagination').pagination({
-                dataSource: data,
-                pageSize: 10,
-                autoHidePrevious: true,
-                autoHideNext: true,
-                callback: function (data, pagination) {
-                    // template method of yourself
-                    var tbody = $('tbody').empty();
-                    data.forEach((item, index) => {
 
-                        let tr = `
+// Function show data to client
+function show_data_to_client(data) {
+
+    if (data) {
+        $('#pagination').pagination({
+            dataSource: data,
+            pageSize: 10,
+            autoHidePrevious: true,
+            autoHideNext: true,
+            callback: function (data, pagination) {
+                // template method of yourself
+                var tbody = $('tbody').empty();
+                data.forEach((item, index) => {
+
+                    let tr = `
                         <tr>
-                            <td>${index}</td>
+                            <td>${index + 1}</td>
                             <td>${item.id_customer}</td>
                             <td>${item.name}</td>
                             <td>${item.phone}</td>
                             <td><i class="far fa-check-circle ${ item.status ? 'status-checked' : 'status-check'}" title="${item.status ? 'Đã tạo vận đơn' : 'Chưa tạo vận đơn'}"></i></td>
                             
                             <td><a data-val="${item.id_customer}" data-toggle="modal" data-target="#exampleModal">${item.status ? '' :
-                                '<i  class="fas fa-plus-circle create-new-bill-order left" title="Tạo vận đơn"></i></a>'}</td>
+                            '<i  class="fas fa-plus-circle create-new-bill-order left" title="Tạo vận đơn"></i></a>'}</td>
                     
                     <td><a data-val="${item.id_customer} "data-toggle="modal" data-target="#modal-edit-order"><i class="fas fa-cog edit-order " title="Chỉnh sửa đơn hàng"></i></a>
                     <a data-val="${item.row}" data-toggle="modal" data-target="#modal-confirm"><i class="far fa-trash-alt delete-order " title="Xóa đơn hàng"></i> </a></td>
                         </tr>
                         
                         `;
-                        tbody.append(tr);
-                    });
-                }
-            })
-            $('.filter-status').val("").change();
-        }
-
-    }
-    // Modal delete confirm
-    $('#modal-confirm').on('show.bs.modal', function(event){
-        const order_id = $(event.relatedTarget).data('val');
-        $('.row-delete').val(order_id);
-
-    });
-    $("#modal-confirm").on('hide.bs.modal', function () {
-        $('input').val(null);
-        $('.alert').addClass('hide');
-        $('.alert').removeClass('show');
-        $('.alert').removeClass('alert-success');
-        $('.alert').removeClass('alert-danger');
-        get_data();
-        let data = JSON.parse(localStorage.getItem("data"));
-        first_load_data_to_front_end(data);
-
-    });
-
-    $('#exampleModal').on('show.bs.modal', function (event) {
-        const order_id = $(event.relatedTarget).data('val');
-        // set value to input form
-        let data_find = JSON.parse(localStorage.getItem("data"));
-        let obj = data_find.filter(item => item.id_customer === order_id);
-        $('.customer-id').val(obj[0].id_customer);
-        $('.customer-name').val(obj[0].name);
-        $('.phone-number').val(obj[0].phone);
-        $('.name-sale').val(obj[0].name_sale_process);
-        $('.row').val(obj[0].row);
-    });
-
-    // Clear all value in modal when modal hide
-    $("#exampleModal").on('hide.bs.modal', function () {
-        $('input').val(null);
-        $('.alert').addClass('hide');
-        $('.alert').removeClass('show');
-        $('.alert').removeClass('alert-success');
-        $('.alert').removeClass('alert-danger');
-        get_data();
-        let data = JSON.parse(localStorage.getItem("data"));
-        first_load_data_to_front_end(data);
-
-    });
-
-    // modal edit order
-    $('#modal-edit-order').on('show.bs.modal', function (event) {
-        const order_id = $(event.relatedTarget).data('val');
-        // set value to input form
-    
-        let data_find = JSON.parse(localStorage.getItem("data"));
-        let obj = data_find.filter(item => item.id_customer === order_id);
-      
-        $('.customer-id-edit').val(obj[0].id_customer);
-        $('.customer-name-edit').val(obj[0].name);
-        $('.phone-number-edit').val(obj[0].phone);
-        $('.name-sale-edit').val(obj[0].name_sale_process);
-
-        $('.row').val(obj[0].row);
-     
-        if(obj[0].require !== ""){
-            $('.require-edit').val(obj[0].note)
-        }
-        else if (obj[0].note !== ""){
-            $('.note-edit').val(obj[0].note)
-        }
-    });
-
-
-    $("#modal-edit-order").on('hide.bs.modal', function () {
-        $('input').val(null);
-        $('.alert').addClass('hide');
-        $('.alert').removeClass('show');
-        $('.alert').removeClass('alert-success');
-        $('.alert').removeClass('alert-danger');
-        get_data();
-        let data = JSON.parse(localStorage.getItem("data"));
-        first_load_data_to_front_end(data);
-
-    });
-
-
-
-
-    // Function filter data search
-    function flter_data(keyword, type) {
-        const data = JSON.parse(localStorage.getItem("data"));
-        //   console.log(data);
-        let jsonArr;
-        if (type !== "") {
-            // search filter follow name customer
-            if (type === "name_cus") {
-                jsonArr = data.filter(item => item.name === keyword)
-                // jsonArr.push(obj);
-            } // Search follow with Order ID
-            else if (type === "order_id") {
-                jsonArr = data.filter(item => item.id_customer === keyword)
-
-            } // Search follow with Phone
-            else if (type === "phone") {
-                jsonArr = data.filter(item => item.phone === keyword)
-
+                    tbody.append(tr);
+                });
             }
-
-        }
-        if (keyword == "") {
-            jsonArr = data;
-        }
-
-
-        // Call function show data to client
-        // console.log(typeof keyword);
-        show_data_to_client(jsonArr);
-        // data.filter(x => x.name === "Blofeld");
+        })
+        $('.filter-status').val("").change();
     }
-    // Event when search
-    $('#key_search').keyup(e => {
-        e.stopImmediatePropagation();
-        let type_search = $('.type-search').find(":selected").val();
-        flter_data(e.target.value, type_search);
 
-    });
+}
+// Modal delete confirm
+$('#modal-confirm').on('show.bs.modal', function (event) {
+    const order_id = $(event.relatedTarget).data('val');
+    $('.row-delete').val(order_id);
 
+});
+$("#modal-confirm").on('hide.bs.modal', function () {
+    $('input').val(null);
+    $('.alert').addClass('hide');
+    $('.alert').removeClass('show');
+    $('.alert').removeClass('alert-success');
+    $('.alert').removeClass('alert-danger');
+    get_data();
 
+});
 
+$('#exampleModal').on('show.bs.modal', function (event) {
+    const order_id = $(event.relatedTarget).data('val');
+    // set value to input form
+    let data_find = JSON.parse(localStorage.getItem("data"));
+    let obj = data_find.filter(item => item.id_customer === order_id);
+    $('.customer-id').val(obj[0].id_customer);
+    $('.customer-name').val(obj[0].name);
+    $('.phone-number').val(obj[0].phone);
+    $('.name-sale').val(obj[0].name_sale_process);
+    $('.row').val(obj[0].row);
+});
+
+// Clear all value in modal when modal hide
+$("#exampleModal").on('hide.bs.modal', function () {
+    $('input').val(null);
+    $('.alert').addClass('hide');
+    $('.alert').removeClass('show');
+    $('.alert').removeClass('alert-success');
+    $('.alert').removeClass('alert-danger');
+    get_data();
 
 
 });
+
+// modal edit order
+$('#modal-edit-order').on('show.bs.modal', function (event) {
+    let order_id = $(event.relatedTarget).data('val');
+    // set value to input form
+    let data_find = JSON.parse(localStorage.getItem("data"));
+    let obj = data_find.filter(item => item.id_customer === order_id.trim());
+    console.log(obj[0]);
+    $('.customer-id-edit').val(obj[0].id_customer);
+    $('.customer-name-edit').val(obj[0].name);
+    $('.phone-number-edit').val(obj[0].phone);
+    $('.name-sale-edit').val(obj[0].name_sale_process);
+    $('.row').val(obj[0].row);
+    $('.require-edit').val(obj[0].require);
+    $('.note-edit').val(obj[0].note);
+
+});
+
+
+$("#modal-edit-order").on('hide.bs.modal', function () {
+    $('input').val(null);
+    $('.alert').addClass('hide');
+    $('.alert').removeClass('show');
+    $('.alert').removeClass('alert-success');
+    $('.alert').removeClass('alert-danger');
+    get_data();
+});
+
+
+
+
+// Function filter data search
+function flter_data(keyword, type) {
+    const data = JSON.parse(localStorage.getItem("data"));
+    //   console.log(data);
+    let jsonArr;
+    if (type !== "") {
+        // search filter follow name customer
+        if (type === "name_cus") {
+            jsonArr = data.filter(item => item.name === keyword)
+            // jsonArr.push(obj);
+        } // Search follow with Order ID
+        else if (type === "order_id") {
+            jsonArr = data.filter(item => item.id_customer === keyword)
+
+        } // Search follow with Phone
+        else if (type === "phone") {
+            jsonArr = data.filter(item => item.phone === keyword)
+
+        }
+
+    }
+    if (keyword == "") {
+        jsonArr = data;
+    }
+
+    show_data_to_client(jsonArr);
+
+}
+// Event when search
+$('#key_search').keyup(e => {
+    e.stopImmediatePropagation();
+    let type_search = $('.type-search').find(":selected").val();
+    flter_data(e.target.value, type_search);
+
+});
+
+
 // Base url
 const url = "https://script.google.com/macros/s/AKfycbwvWDwAkJu--B1sJfMS3jJSt2kKC2johynPPN9YxEtlXHuGAJl6/exec";
 
 // Function get data from API
 function get_data() {
-
+    let user = JSON.parse(sessionStorage.getItem("user"))
     let dt = {
-        action: "GET_CUSTOMER"
+        action: "GET_CUSTOMER",
+        full_name: user.full_name
     }
 
     if (dt) {
@@ -190,7 +173,7 @@ function get_data() {
                         localStorage.setItem("data", JSON.stringify(data.data));
                     }
 
-                    first_load_data_to_front_end(data.data);
+                    show_data_to_client(data.data);
 
                 }
                 else {
@@ -212,82 +195,6 @@ function get_data() {
 // Load data to show in client
 window.onload = get_data();
 
-function load_data_to_front_end() {
-    // 
-
-    if (localStorage.getItem("data")) {
-        const data = JSON.parse(localStorage.getItem("data"));
-        $('#pagination').pagination({
-            dataSource: data,
-            pageSize: 10,
-            autoHidePrevious: true,
-            autoHideNext: true,
-            callback: function (data, pagination) {
-                // template method of yourself
-                var tbody = $('tbody').empty();
-                data.forEach((item, index) => {
-
-                    let tr = `
-                    <tr>
-                        <td>${item.row}</td>
-                        <td>${item.id_customer}</td>
-                        <td>${item.name}</td>
-                        <td>${item.phone}</td>
-                        <td><i class="far fa-check-circle ${ item.status ? 'status-checked' : 'status-check'}" title="${item.status ? 'Đã tạo vận đơn' : 'Chưa tạo vận đơn'}"></i></td>  
-                        <td><a data-val="${item.id_customer}" data-toggle="modal" data-target="#exampleModal">${item.status ? '' :
-                            '<i  class="fas fa-plus-circle create-new-bill-order left" title="Tạo vận đơn"></i></a>'}</td>
-                
-                <td><a data-val="${item.id_customer}" data-toggle="modal" data-target="#modal-edit-order"><i class="fas fa-cog edit-order " title="Chỉnh sửa đơn hàng"></i></a>
-                <a data-val="${item.row}" data-toggle="modal" data-target="#modal-confirm"><i class="far fa-trash-alt delete-order " title="Xóa đơn hàng"></i> </a></td>
-                        
-                    </tr>
-                    
-                    `;
-                    tbody.append(tr);
-                });
-            }
-        })
-        $('.filter-status').val("").change();
-    }
-
-}
-function first_load_data_to_front_end(data) {
-    // 
-
-    if (data) {
-        $('#pagination').pagination({
-            dataSource: data,
-            pageSize: 10,
-            autoHidePrevious: true,
-            autoHideNext: true,
-            callback: function (data, pagination) {
-                // template method of yourself
-                var tbody = $('tbody').empty();
-                data.forEach((item, index) => {
-
-                    let tr = `
-                    <tr>
-                        <td>${item.row}</td>
-                        <td>${item.id_customer}</td>
-                        <td>${item.name}</td>
-                        <td>${item.phone}</td>
-                        <td><i class="far fa-check-circle ${ item.status ? 'status-checked' : 'status-check'}" title="${item.status ? 'Đã tạo vận đơn' : 'Chưa tạo vận đơn'}"></i></td>
-                        <td><a data-val="${item.id_customer}" data-toggle="modal" data-target="#exampleModal">${item.status ? '' :
-                            '<i  class="fas fa-plus-circle create-new-bill-order left" title="Tạo vận đơn"></i></a>'}</td>
-                
-                <td><a  data-val="${item.id_customer}" data-toggle="modal" data-target="#modal-edit-order"><i class="fas fa-cog edit-order " title="Chỉnh sửa đơn hàng"></i></a>
-                <a  data-val="${item.row +2}" data-toggle="modal" data-target="#modal-confirm"><i class="far fa-trash-alt delete-order " title="Xóa đơn hàng"></i> </a></td>
-                    </tr>
-                    
-                    `;
-                    tbody.append(tr);
-                });
-            }
-        })
-        $('.filter-status').val("").change();
-    }
-
-}
 // function
 $('.btn-save').on("click", (e) => {
     // [data.customer_id, data.customer_name, data.kind_contact, data.sale_status, data.quantity,
@@ -342,7 +249,7 @@ function do_action(data) {
             dataType: 'json',
             data: data,
             success: function (data) {
-       
+
                 if (data.status == 200) {
                     $('input').val(null);
                     $('.alert').removeClass('hide');
@@ -384,7 +291,7 @@ function filter_status(kind_status) {
     }
 
     // Call function show data to client
-    first_load_data_to_front_end(jsonArr);
+    show_data_to_client(jsonArr);
 
 }
 // Event change select filter data
@@ -397,7 +304,7 @@ $('.filter-status').on('change', e => {
 
 // Event acept delete order
 
-$('.btn-accept-delelte').on('click', function(e){
+$('.btn-accept-delelte').on('click', function (e) {
     e.preventDefault();
     let row = $('.row-delete').val();
     let dt = {
@@ -408,7 +315,7 @@ $('.btn-accept-delelte').on('click', function(e){
 })
 
 // Event acept edit order (save)
-$('.btn-save-edit').on('click', function(e){
+$('.btn-save-edit').on('click', function (e) {
     e.preventDefault();
     let dt = {
         action: "EDIT",
@@ -420,14 +327,14 @@ $('.btn-save-edit').on('click', function(e){
         sale_status: $('.sale-status-edit').find(":selected").val(),
         require: $('.require-edit').val(),
         note: $('.note-edit').val(),
-        row: parseInt($('.row').val())+2,
+        row: parseInt($('.row').val()) + 2,
         create_at: new Date().toLocaleString()
 
     }
-    if(dt.customer_id !== ""){
+    if (dt.customer_id !== "") {
         do_action(dt);
     }
-    else{
+    else {
         $('.alert').removeClass('hide');
         $('.alert').removeClass('alert-success');
         $('.alert').addClass('show alert-danger');
@@ -435,7 +342,7 @@ $('.btn-save-edit').on('click', function(e){
         $('.message').text("Vui lòng kiểm tra lại các trường dữ liệu!");
         hide_alert();
     }
-    
-    
+
+
 
 })
