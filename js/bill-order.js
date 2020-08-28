@@ -3,7 +3,6 @@
 // Show data to client
 function show_data_to_front_end(data, type_show) {
     // 
-
     if (data.length !== 0) {
         if (type_show === "firs_load") {
             $('#pagination').pagination({
@@ -18,7 +17,7 @@ function show_data_to_front_end(data, type_show) {
 
                         let tr = `
                         <tr>
-                            <td>${item.row - 2}</td>
+                            <td>${index+1}</td>
                             <td>${item.ship_code == "" ? "Chưa có mã vận đơn" : item.ship_code}</td>
                             <td>${item.id}</td>
                             <td>${item.name_custumer}</td>
@@ -50,7 +49,7 @@ function show_data_to_front_end(data, type_show) {
                         let tr = `
                         <tr>
                             <td>${index + 1}</td>
-                            <td>${item.ship_code? "Chưa có mã vận đơn" : item.ship_code}</td>
+                            <td>${item.ship_code == "" ? "Chưa có mã vận đơn" : item.ship_code}</td>
                             <<td>${item.id}</td>
                             <td>${item.name_custumer}</td>
                             <td>${item.phone}</td>
@@ -169,12 +168,18 @@ $('.btn-accept-delete').on("click", function (e) {
 $('.btn-save-edit').on("click", e => {
     e.preventDefault();
     if($('.row').val() !== ""){
+        // let obj_date = new Date($('.shiping-date').val());
+        // console.log($('.shiping-date').val("2020-07-29"));
         const dt = {
             row: $('.row').val(),
             status: $('.status').find(":selected").val(),
+            id_order: $('.id-order').val(),
+            shiping_date: $('.shiping-date').val(),
+            note: $('.note').val(),
             action: "EDIT_STATUS_ORDER"
         }
-        do_action(dt);
+        console.log(dt);
+        // do_action(dt);
     }
     else{
         alert("Lỗi, vui lòng bấm F5 để tải lại trang.");
@@ -193,6 +198,13 @@ $('#modal-edit-order').on('show.bs.modal', function (event) {
 
     $('.row').val(row);
     $('.status').val(obj[0].status_order).change();
+    $('.id-order').val(obj[0].ship_code);
+    $('.shiping-date').val(obj[0].date_ship);
+    $('.note').val(obj[0].note);
+
+    if(obj[0].ship_code !==""){
+        $('.id-order').attr('disabled', true);
+    }
 
 });
 
@@ -256,25 +268,18 @@ function search_data(keyword, type_search) {
 function filter_status(type_filter) {
     const data = JSON.parse(localStorage.getItem("data_order"));
     let jsonArr;
-    // trạng thái đã xử lý xong
-    if (type_filter === "1") {
-        jsonArr = data.filter(item => item.status_order === "Đã được xử lý");
-    } //Không nghe lần 1
-    else if (type_filter === "2") {
-        jsonArr = data.filter(item => item.status_order === "Vận chuyển");
-    }
-    else if (type_filter === "3") {
-        jsonArr = data.filter(item => item.status === "Hoàn lại");
-    }
-    else if (type_filter === "4") {
-        jsonArr = data.filter(item => item.status === "Hoàn thành");
-    }
-    else if (type_filter === "5") {
-        jsonArr = data.filter(item => item.status === "Bị hủy");
-    }
-    else {
-        jsonArr = data;
-    }
+    // trạng thái đã xác nhận đơn hàng
+    let ls_status_order = JSON.parse(localStorage.getItem("status_order"));
+
+    ls_status_order.forEach((ele, index)=>{
+        if (type_filter === String(index+1)) {
+            jsonArr = data.filter(item => (item.status_order).trim() === (ele.value).trim());
+        }
+        else if(type_filter === "") {
+            jsonArr = data;
+        }
+
+    })
     show_data_to_front_end(jsonArr, "search_data");
 }
 

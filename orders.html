@@ -267,20 +267,28 @@
                         <div class="row">
                             <div class="col">
                                 <label for="status">Trạng thái vận đơn</label>
-                                <select class="status form-control" id="status">
-                                    <option value="Đã được xử lý" title="Đơn hàng xác nhận và đang đóng gói.">Đã được xử
-                                        lý</option>
-                                    <option value="Vận chuyển" title="Đơn hàng đang được vận chuyển đến địa chỉ khách.">
-                                        Vận chuyển</option>
-                                    <option value="Hoàn lại" title="Đơn hàng khách không nhận và hoàn lại.">Hoàn lại
-                                    </option>
-                                    <option value="Hoàn thành" title="Đơn hàng đã được giao thành công.">Hoàn thành
-                                    </option>
-                                    <option value="Bị hủy bỏ" title="Đơn hàng bị hủy.">Bị hủy bỏ</option>
+                                <select class="status form-control" id="status">                
                                 </select>
                             </div>
+                            
                         </div>
-
+                        <div class="row">
+                            <div class="col">
+                                <label for="id_order">Mã vận đơn</label>
+                                <input type="text" class="id-order form-control" id="id_order">
+                            </div>
+                            <div class="col">
+                                <label for="shiping_date">Ngày giao</label>
+                                <input type="date" class="shiping-date form-control" id="shiping_date">
+                            </div>
+                            
+                        </div>
+                        <div class="row">
+                            <div class="col">
+                                <label for="note">Yêu cầu</label>
+                                <input type="text" class="note form-control" id="note">
+                            </div>
+                        </div>
                         <div class="alert alert-dismissible show fade" role="alert">
                             <span class="message"></span>
                             <input type="hidden" value="" class="row">

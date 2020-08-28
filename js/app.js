@@ -21,8 +21,8 @@ $(document).ready(function () {
 $().ready(function(){
   let user = JSON.parse(sessionStorage.getItem("user"));
   if(!user){
-    window.location.href = "https://nguyenoni.github.io/crm/login.html";
-    // window.location.href = "/login.html";
+    // window.location.href = "https://nguyenoni.github.io/crm/login.html";
+    window.location.href = "/login.html";
   }
   else{
     // $('.user_name').html(user.user);
@@ -46,10 +46,14 @@ $().ready(function(){
   let status_order = JSON.parse(localStorage.getItem("status_order"));
   if (status_order){
     let select_modal_edit = $('.status').empty();
-
-    status_order.forEach(el=>{
+    let filter_status = $('.filter-status').empty();
+    filter_status.append(`<option value="" disabled selected>Chọn trạng thái</option>`);
+    status_order.forEach((el, index)=>{
       let option = `<option value="${el.value}">${el.key}</option>`;
+      let option_filter = `<option value="${index+1}">${el.key}</option>`
+  
       select_modal_edit.append(option);
+      filter_status.append(option_filter);
     })
   }
 });

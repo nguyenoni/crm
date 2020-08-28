@@ -44,12 +44,12 @@ function do_action(dt) {
             dataType: 'json',
             data: dt,
             success: function (data) {
-
+           
                 if (data.status == 200) {
                     sessionStorage.removeItem("user");
                     sessionStorage.setItem("user", JSON.stringify(data.user));
-                    window.location.href = "https://nguyenoni.github.io/crm/";
-                    // window.location.href = "/";
+                    // window.location.href = "https://nguyenoni.github.io/crm/";
+                    window.location.href = "/";
                 }
                 else {
                     $('.alert').removeClass('hide');
