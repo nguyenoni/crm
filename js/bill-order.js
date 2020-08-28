@@ -178,8 +178,8 @@ $('.btn-save-edit').on("click", e => {
             note: $('.note').val(),
             action: "EDIT_STATUS_ORDER"
         }
-        console.log(dt);
-        // do_action(dt);
+        do_action(dt);
+        // console.log(dt);
     }
     else{
         alert("Lỗi, vui lòng bấm F5 để tải lại trang.");
@@ -292,7 +292,7 @@ function do_action(dt) {
             dataType: 'json',
             data: dt,
             success: function (data) {
-
+                console.log(data);
                 if (data.status == 200) {
                     $('input').val(null);
                     $('.alert').removeClass('hide');
