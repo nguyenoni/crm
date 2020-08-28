@@ -56,6 +56,7 @@ $("#modal-confirm").on('hide.bs.modal', function () {
 $('#exampleModal').on('show.bs.modal', function (event) {
     const order_id = $(event.relatedTarget).data('val');
     // set value to input form
+    
     let data_find = JSON.parse(localStorage.getItem("data"));
     let obj = data_find.filter(item => item.id_customer === order_id);
     $('.customer-id').val(obj[0].id_customer);
@@ -83,7 +84,6 @@ $('#modal-edit-order').on('show.bs.modal', function (event) {
     // set value to input form
     let data_find = JSON.parse(localStorage.getItem("data"));
     let obj = data_find.filter(item => item.id_customer === order_id.trim());
-    console.log(obj[0]);
     $('.customer-id-edit').val(obj[0].id_customer);
     $('.customer-name-edit').val(obj[0].name);
     $('.phone-number-edit').val(obj[0].phone);
@@ -114,16 +114,17 @@ function flter_data(keyword, type) {
     let jsonArr;
     if (type !== "") {
         // search filter follow name customer
+   
         if (type === "name_cus") {
-            jsonArr = data.filter(item => item.name === keyword)
+            jsonArr = data.filter(item => (item.name).toLowerCase().includes(keyword));
             // jsonArr.push(obj);
         } // Search follow with Order ID
         else if (type === "order_id") {
-            jsonArr = data.filter(item => item.id_customer === keyword)
+            jsonArr = data.filter(item => (item.id_customer).toLowerCase().includes(keyword));
 
         } // Search follow with Phone
         else if (type === "phone") {
-            jsonArr = data.filter(item => item.phone === keyword)
+            jsonArr = data.filter(item => (item.phone).toLowerCase().includes(keyword));
 
         }
 
@@ -165,15 +166,18 @@ function get_data() {
             success: function (data) {
 
                 if (data.status == 200) {
-
+             
                     if (localStorage.getItem("data") === null) {
-                        localStorage.setItem("data", JSON.stringify(data.data));
+                        localStorage.setItem("data", JSON.stringify(data.data.data_cust));
+
                     } else {
                         localStorage.removeItem("data");
-                        localStorage.setItem("data", JSON.stringify(data.data));
+                        localStorage.setItem("data", JSON.stringify(data.data.data_cust));
+                        localStorage.removeItem("status_customer");
+                        localStorage.setItem("status_customer", JSON.stringify(data.data.status));
                     }
 
-                    show_data_to_client(data.data);
+                    show_data_to_client(data.data.data_cust);
 
                 }
                 else {

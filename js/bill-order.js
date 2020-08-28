@@ -19,6 +19,7 @@ function show_data_to_front_end(data, type_show) {
                         let tr = `
                         <tr>
                             <td>${item.row - 2}</td>
+                            <td>${item.ship_code == "" ? "Chưa có mã vận đơn" : item.ship_code}</td>
                             <td>${item.id}</td>
                             <td>${item.name_custumer}</td>
                             <td>${item.phone}</td>
@@ -49,6 +50,7 @@ function show_data_to_front_end(data, type_show) {
                         let tr = `
                         <tr>
                             <td>${index + 1}</td>
+                            <td>${item.ship_code? "Chưa có mã vận đơn" : item.ship_code}</td>
                             <<td>${item.id}</td>
                             <td>${item.name_custumer}</td>
                             <td>${item.phone}</td>
@@ -101,13 +103,15 @@ function load_data_from_server() {
                 if (data.status == 200) {
 
                     if (localStorage.getItem("data_order") === null) {
-                        localStorage.setItem("data_order", JSON.stringify(data.data));
+                        localStorage.setItem("data_order", JSON.stringify(data.data.data_order));
                     } else {
                         localStorage.removeItem("data_order");
-                        localStorage.setItem("data_order", JSON.stringify(data.data));
+                        localStorage.setItem("data_order", JSON.stringify(data.data.data_order));
                     }
+                    localStorage.removeItem("status_order");
+                    localStorage.setItem("status_order", JSON.stringify(data.data.status_order));
 
-                    show_data_to_front_end(data.data, "firs_load");
+                    show_data_to_front_end(data.data.data_order, "firs_load");
                     $('.filter-status').val("").change();
                 }
                 else {
@@ -235,13 +239,13 @@ function search_data(keyword, type_search) {
     else {
         keyword = keyword.toLowerCase();
         if (type_search === "name") {
-            jsonArr = data.filter(item => (item.name_custumer).toLowerCase() === keyword);
+            jsonArr = data.filter(item => (item.name_custumer).toLowerCase().includes(keyword));
         }
         else if (type_search === "id") {
-            jsonArr = data.filter(item => (item.id).toLowerCase() === keyword);
+            jsonArr = data.filter(item => (item.id).toLowerCase().includes(keyword));
         }
         else {
-            jsonArr = data.filter(item => (item.phone).toLowerCase() = keyword);
+            jsonArr = data.filter(item => (item.phone).toLowerCase().includes(keyword));
         }
     }
 
