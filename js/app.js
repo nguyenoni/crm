@@ -21,8 +21,8 @@ $(document).ready(function () {
 $().ready(function(){
   let user = JSON.parse(sessionStorage.getItem("user"));
   if(!user){
-    // window.location.href = "https://nguyenoni.github.io/crm/login.html";
-    window.location.href = "/login.html";
+    window.location.href = "https://nguyenoni.github.io/crm/login.html";
+    // window.location.href = "/login.html";
   }
   else{
     // $('.user_name').html(user.user);
@@ -33,8 +33,8 @@ $().ready(function(){
 
 $('.btn-logout').on("click", function(){
   sessionStorage.removeItem("user");
-  // window.location.href = "https://nguyenoni.github.io/crm/login.html";
-  window.location.href = "/login.html";
+  window.location.href = "https://nguyenoni.github.io/crm/login.html";
+  // window.location.href = "/login.html";
 })
 
 
