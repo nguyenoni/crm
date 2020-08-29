@@ -56,6 +56,8 @@ $().ready(function(){
       filter_status.append(option_filter);
     })
   }
+
+ 
 });
 
 $('.btn-logout').on("click", function(){

@@ -29,7 +29,7 @@
     <!-- Nav -->
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
         <div class="container">
-            <a class="navbar-brand" href="#">Home</a>
+            <a class="navbar-brand" href="https://nguyenoni.github.io/crm/">Home</a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText"
                 aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
@@ -37,7 +37,7 @@
             <div class="collapse navbar-collapse" id="navbarText">
                 <ul class="navbar-nav mr-auto">
                     <li class="nav-item active">
-                        <a class="nav-link" href="https://nguyenoni.github.io/crm">Khách Hàng <span class="sr-only">(current)</span></a>
+                        <a class="nav-link" href="https://nguyenoni.github.io/crm/customers.html">Khách Hàng <span class="sr-only">(current)</span></a>
                         <!-- <a class="nav-link" href="/">Khách Hàng <span class="sr-only">(current)</span></a> -->
                     </li>
                     <li class="nav-item">
@@ -55,7 +55,7 @@
     </nav>
 
     <div class="container box-shadow">
-        <h4 class="mg-top title-customer"></h4>
+        <h4 class="mg-top title-customer">Data khách hàng</h4>
         <hr>
         <div class="row mg-bt">
             <form class="col s12">
@@ -76,9 +76,8 @@
                     <div class="input-field col-md-3">
                         <label>Lọc</label>
                         <select class="filter-status form-control">
-                            <option value="" disabled selected>Chọn trạng thái</option>
-                            <option value="1">Đã tạo đơn hàng</option>
-                            <option value="2">Chưa tạo đơn hàng</option>
+                            <option value="" disabled selected>Lọc sale</option>
+                            
 
                         </select>
                         
@@ -94,8 +93,8 @@
                     <th scope="col">Họ tên</th>
                     <th scope="col">Số điện thoại</th>
                     <th scope="col">Trạng thái</th>
+                    <th scope="col">Sale</th>
                     <th scope="col"></th>
-                    <th scope="col">Hành Động</th>
                 </tr>
             </thead>
 
@@ -112,12 +111,12 @@
     </div>
  
     <!-- Modal create bill order-->
-    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+    <div class="modal fade" id="modal-edit-sale" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
         aria-hidden="true">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Tạo mới vận đơn</h5>
+                    <h5 class="modal-title" id="exampleModalLabel">Phân khách hàng cho sale</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
@@ -126,101 +125,16 @@
                     <div class="form">
                         <div class="row">
                             <div class="col">
-                                <label for="code_order">Mã đơn hàng</label>
-                                <input type="text" disabled class="customer-id form-control" value="" id="code_order"
-                                    placeholder="Mã đơn hàng" disabled>
-                            </div>
-                            <div class="col">
-                                <label for="customer">Tên khách hàng</label>
-                                <input type="text" class="customer-name form-control" value="" id="customer_name"
-                                    placeholder="Tên khách hàng">
-                            </div>
-                        </div>
+                                <label for="sale">Phân khách hàng cho sale</label>
+                                <select class="sale form-control" id="sale">
 
-                        <div class="row">
-                            <div class="col">
-                                <label for="phone">Số điện thoại</label>
-                                <input type="text" class="phone-number form-control" value="" id="phone_number"
-                                    placeholder="Số điện thoại">
-                            </div>
-                            <div class="col">
-                                <label for="name_sale">Sale xử lý</label>
-                                <input type="text" class="name-sale form-control" value="" id="name_sale" disabled>
-                            </div>
-
-                        </div>
-
-                        <div class="row">
-                            <div class="col">
-
-                                <label for="kind_contact">Kênh trao đổi</label>
-                                <select class="kind-contact form-control" id="kind_contact">
-                                    <option value="Inbox">Inbox</option>
-                                    <option value="Comment">Comment</option>
-                                    <option value="Gọi điện">Gọi điện</option>
                                 </select>
 
-                            </div>
-                            <div class="col">
-
-                                <label for="sale_status">Tình trạng sale</label>
-                                <select class="sale-status form-control" id="sale_status">
-                                    <!-- <option value="Đã xử lý xong">Đã xử lý xong</option>
-                                    <option value="Không nghe lần 1">Không nghe - lần 1</option>
-                                    <option value="Không nghe lần 2">Không nghe - lần 2</option>
-                                    <option value="Không nghe lần 3">Không nghe - lần 3</option>
-                                    <option value="Sai số">Sai số</option>
-                                    <option value="Hủy đơn hàng">Hủy đơn hàng</option> -->
                                 </select>
                             </div>
-                        </div>
-                        <div class="row">
-                            <div class="col">
-
-                                <label for="quantity">Số lượng</label>
-                                <select class="quantity form-control" id="quantity">
-                                    <option value="1">1</option>
-                                    <option value="2">2</option>
-                                    <option value="3">3</option>
-                                    <option value="4">4</option>
-                                    <option value="5">5</option>
-                                </select>
-
-                            </div>
-                            <div class="col">
-                                <label for="fee_ship">Phí ship</label>
-                                <select class="fee-ship form-control" id="fee_ship">
-                                    <option value="20000">20000</option>
-                                    <option value="30000">30000</option>
-                                    <option value="40000">40000</option>
-                                    <option value="50000">50000</option>
-                                </select>
-
-                            </div>
+                           
                         </div>
 
-                        <div class="row">
-                            <div class="col">
-                                <label for="price">Giá bán (1 sản phẩm)</label>
-                                <input type="number" class="price form-control" class="address" id="price">
-                            </div>
-                            <!-- <div class="col">
-                                <label for="sum_money_order">Tổng tiền</label>
-                                <input type="number" class="form-control" class="note" id="sum_money_order" disabled>
-                            </div> -->
-                            <div class="col">
-                                <label for="note">Ghi chú</label>
-                                <input type="text" class="note form-control" class="note" id="note">
-                            </div>
-
-                        </div>
-                        <div class="row">
-                            <div class="col">
-                                <label for="address">Địa chỉ</label>
-                                <input type="text" class="address form-control" class="address" id="address">
-                            </div>
-
-                        </div>
                         <div class="alert alert-dismissible show fade" role="alert">
                             <span class="message"></span>
                             <input type="hidden" value="" class="row">
@@ -238,121 +152,6 @@
         </div>
     </div>
     <!-- Modal xác nhận -->
-    <div class="modal fade" id="modal-confirm" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-        aria-hidden="true">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Xác nhận!</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <div class="modal-body">
-                    <span>Bạn có chắc là muốn xóa đơn hàng này?</span>
-                    <input type="hidden" class="row-delete" value="">
-
-                    <div class="alert alert-dismissible show fade" role="alert">
-                        <span class="message"></span>
-                        <input type="hidden" value="" class="row">
-
-                    </div>
-                </div>
-
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Đóng</button>
-                    <button type="button" class="btn btn-danger btn-accept-delelte">Xóa</button>
-                </div>
-            </div>
-        </div>
-    </div>
-
-<!-- Modal chỉnh sửa đơn hàng -->
-<div class="modal fade" id="modal-edit-order" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-        aria-hidden="true">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Chỉnh sửa đơn hàng</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <div class="modal-body">
-                    <div class="form">
-                        <div class="row">
-                            <div class="col">
-                                <label for="code_order_edit">Mã khách hàng</label>
-                                <input type="text" disabled class="customer-id-edit form-control" value="" id="code_order_edit"
-                                    placeholder="Mã đơn hàng" disabled>
-                            </div>
-                            <div class="col">
-                                <label for="customer_name_edit">Tên khách hàng</label>
-                                <input type="text" class="customer-name-edit form-control" value="" id="customer_name_edit"
-                                    placeholder="Tên khách hàng">
-                            </div>
-                        </div>
-
-                        <div class="row">
-                            <div class="col">
-                                <label for="phone_number_edit">Số điện thoại</label>
-                                <input type="text" class="phone-number-edit form-control" value="" id="phone_number_edit"
-                                    placeholder="Số điện thoại">
-                            </div>
-                            <div class="col">
-                                <label for="name_sale_edit">Sale xử lý</label>
-                                <input type="text" class="name-sale-edit form-control" value="" id="name_sale_edit" disabled>
-                            </div>
-
-                        </div>
-
-                        <div class="row">
-                
-                            <div class="col">
-
-                                <label for="sale_status_edit">Trạng thái xử lý</label>
-                                <select class="sale-status-edit form-control" id="sale_status_edit">
-                                    <!-- <option value="Đã xử lý xong">Đã xử lý xong</option>
-                                    <option value="Không nghe lần 1">Không nghe - lần 1</option>
-                                    <option value="Không nghe lần 2">Không nghe - lần 2</option>
-                                    <option value="Không nghe lần 3">Không nghe - lần 3</option>
-                                    <option value="Sai số">Sai số</option>
-                                    <option value="Hủy đơn hàng">Hủy đơn hàng</option> -->
-                                </select>
-                            </div>
-                            <div class="col">
-                                <label for="require-edit">Yêu cầu</label>
-                                <input type="text" class="require-edit form-control" value="" id="require-edit">
-                            </div>
-                        </div>
-                      
-
-                        <div class="row">
-                            
-                            
-                            <div class="col">
-                                <label for="note-edit">Ghi chú</label>
-                                <input type="text" class="note-edit form-control" value="" id="note-edit">
-                            </div>
-
-                        </div>
-                        
-                        <div class="alert alert-dismissible show fade" role="alert">
-                            <span class="message"></span>
-                            <input type="hidden" value="" class="row">
-
-                        </div>
-
-                    </div>
-
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Đóng</button>
-                    <button type="button" class="btn btn-primary btn-save-edit">Lưu lại</button>
-                </div>
-            </div>
-        </div>
-    </div>
 
 
 <!-- End modal edit order -->
@@ -367,10 +166,8 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
         integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
         crossorigin="anonymous"></script>
-
-
-        <script type="text/javascript" src="js/app.js"></script>
-    <script type="text/javascript" src="js/crm.js"></script>
+        
+    <script type="text/javascript" src="js/home.js"></script>
 </body>
 
 </html>
