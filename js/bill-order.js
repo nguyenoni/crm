@@ -66,7 +66,7 @@ function show_data_to_front_end(data, type_show) {
                 }
             })
         }
-
+        
 
     } else {
         let tbody = $('tbody').empty();
@@ -76,7 +76,7 @@ function show_data_to_front_end(data, type_show) {
         </tr>
         `;
         tbody.append(tr);
-
+        $('.filter-status').val("").change();
     }
     // show search, filter
 

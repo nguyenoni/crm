@@ -1,8 +1,8 @@
 
 // Function show data to client
-function show_data_to_client(data) {
+function show_data_to_client(data, type_show="aaa") {
 
-    if (data) {
+    if (data.length !== 0) {
         $('#pagination').pagination({
             dataSource: data,
             pageSize: 10,
@@ -24,7 +24,7 @@ function show_data_to_client(data) {
                             <td><a data-val="${item.id_customer}" data-toggle="modal" data-target="#exampleModal">${item.status ? '' :
                             '<i  class="fas fa-plus-circle create-new-bill-order left" title="Tạo vận đơn"></i></a>'}</td>
                     
-                    <td><a data-val="${item.id_customer} "data-toggle="modal" data-target="#modal-edit-order"><i class="fas fa-cog edit-order " title="Chỉnh sửa đơn hàng"></i></a>
+                     <td><a data-val="${item.id_customer} "data-toggle="modal" data-target="#modal-edit-order"><i class="fas fa-cog edit-order " title="Chỉnh sửa đơn hàng"></i></a>
                     <a data-val="${item.row}" data-toggle="modal" data-target="#modal-confirm"><i class="far fa-trash-alt delete-order " title="Xóa đơn hàng"></i> </a></td>
                         </tr>
                         
@@ -33,6 +33,18 @@ function show_data_to_client(data) {
                 });
             }
         })
+        if (type_show == "first"){
+            $('.filter-status').val("").change();
+        }
+        
+    }else {
+        let tbody = $('tbody').empty();
+        let tr = `
+        <tr>
+          <td>Không có dữ liệu nào được tìm thấy!</td>
+        </tr>
+        `;
+        tbody.append(tr);
         $('.filter-status').val("").change();
     }
 
@@ -295,7 +307,7 @@ function filter_status(kind_status) {
     }
 
     // Call function show data to client
-    show_data_to_client(jsonArr);
+    show_data_to_client(jsonArr, "not");
 
 }
 // Event change select filter data
