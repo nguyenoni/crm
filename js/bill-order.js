@@ -141,8 +141,9 @@ $('#key_search').on("keyup", e => {
 
 })
 // Event filter
-$('.filter-status').on("change", e => {
-    let type_filter = $('.filter-status').find(":selected").val();
+$('.filter-status-order').on("change", e => {
+    let type_filter = $('.filter-status-order').find(":selected").val();
+    // console.log(type_filter);
     if (type_filter !== "") {
         filter_status(type_filter);
     }
@@ -270,15 +271,12 @@ function filter_status(type_filter) {
     let jsonArr;
     // trạng thái đã xác nhận đơn hàng
     let ls_status_order = JSON.parse(localStorage.getItem("status_order"));
-
     ls_status_order.forEach((ele, index)=>{
-        if (type_filter === String(index+1)) {
-            jsonArr = data.filter(item => (item.status_order).trim() === (ele.value).trim());
+      console.log(ele.value, type_filter);
+        if (String(ele.value).trim() == String(type_filter).trim()) {
+            jsonArr = data.filter(item => (item.status_order).trim() === (type_filter).trim());
+            
         }
-        else if(type_filter === "") {
-            jsonArr = data;
-        }
-
     })
     show_data_to_front_end(jsonArr, "search_data");
 }
