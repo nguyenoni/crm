@@ -94,7 +94,6 @@
                     <th scope="col">Họ tên</th>
                     <th scope="col">Số điện thoại</th>
                     <th scope="col">Trạng thái</th>
-                    <th scope="col"></th>
                     <th scope="col">Hành Động</th>
                 </tr>
             </thead>
@@ -200,14 +199,23 @@
                         </div>
 
                         <div class="row">
-                            <div class="col">
-                                <label for="price">Giá bán (1 sản phẩm)</label>
-                                <input type="number" class="price form-control" class="address" id="price">
-                            </div>
+                            
                             <!-- <div class="col">
                                 <label for="sum_money_order">Tổng tiền</label>
                                 <input type="number" class="form-control" class="note" id="sum_money_order" disabled>
                             </div> -->
+                            
+                            <div class="col">
+                                <label for="name-product">Tên sản phẩm</label>
+                                <input type="text" class="name-product form-control"  id="name-product">
+                            </div>
+                            <div class="col">
+                                <label for="price">Giá bán (1 sản phẩm)</label>
+                                <input type="number" class="price form-control" class="address" id="price">
+                            </div>
+
+                        </div>
+                        <div class="row">
                             <div class="col">
                                 <label for="note">Ghi chú</label>
                                 <input type="text" class="note form-control" class="note" id="note">
@@ -268,7 +276,7 @@
     </div>
 
 <!-- Modal chỉnh sửa đơn hàng -->
-<div class="modal fade" id="modal-edit-order" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+<!-- <div class="modal fade" id="modal-edit-order" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
         aria-hidden="true">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
@@ -305,6 +313,16 @@
                             </div>
 
                         </div>
+                        <div class="row">
+                            <div class="col">
+                                <label for="quantity">Số lượng</label>
+                                <input type="text" class="quantity form-control" value="" id="quantity">
+                            </div>
+                            <div class="col">
+                                <label for="name-product">Tên sản phẩm</label>
+                                <input type="text" class="name-product form-control" value="" id="name-product">
+                            </div>
+                        </div>
 
                         <div class="row">
                 
@@ -312,12 +330,7 @@
 
                                 <label for="sale_status_edit">Trạng thái xử lý</label>
                                 <select class="sale-status-edit form-control" id="sale_status_edit">
-                                    <!-- <option value="Đã xử lý xong">Đã xử lý xong</option>
-                                    <option value="Không nghe lần 1">Không nghe - lần 1</option>
-                                    <option value="Không nghe lần 2">Không nghe - lần 2</option>
-                                    <option value="Không nghe lần 3">Không nghe - lần 3</option>
-                                    <option value="Sai số">Sai số</option>
-                                    <option value="Hủy đơn hàng">Hủy đơn hàng</option> -->
+                              
                                 </select>
                             </div>
                             <div class="col">
@@ -352,7 +365,7 @@
                 </div>
             </div>
         </div>
-    </div>
+    </div> -->
 
 
 <!-- End modal edit order -->

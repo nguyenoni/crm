@@ -11,7 +11,7 @@ $(document).ready(function () {
         window.location.href = "https://nguyenoni.github.io/crm/login.html";
         // window.location.href = "/login.html";
     }
-    
+
 });
 $('.btn-logout').on("click", function () {
     sessionStorage.removeItem("user");
@@ -36,12 +36,12 @@ function show_data_to_front_end(data, type_show) {
 
                         let tr = `
                         <tr>
-                            <td>${index + 1}</td>
+                            <td>${item.index}</td>
                             <td>${item.id}</td>
                             <td>${item.name}</td>
                             <td>${item.phone}</td>
                             <td>${item.address}</td>
-                            <td>${item.sale}</td>
+                            <td>${item.sale ?item.sale : "Chưa phân cho sale"}</td>
                             <td>
                             <a data-val="${item.row}" data-toggle="modal" data-target="#modal-edit-sale"><i class="far fa-edit edit-order" title="Phân phối cho sale xử lý"></i> </a>
                             </td>
@@ -84,6 +84,7 @@ function show_data_to_front_end(data, type_show) {
                 }
             })
         }
+        set_sale_to_modal(JSON.parse(localStorage.getItem("sale_home")))
 
 
     } else {
@@ -99,6 +100,8 @@ function show_data_to_front_end(data, type_show) {
     // show search, filter
 
 }
+
+
 
 // Get data from sheet bill order
 function load_data_from_server() {
@@ -119,12 +122,16 @@ function load_data_from_server() {
 
                     if (localStorage.getItem("data_home") === null) {
                         localStorage.setItem("data_home", JSON.stringify(data.data.data_customer_home));
+
+                        localStorage.setItem("sale_home", JSON.stringify(data.data.sale));
                     } else {
                         localStorage.removeItem("data_home");
                         localStorage.setItem("data_home", JSON.stringify(data.data.data_customer_home));
+
+                        localStorage.removeItem("sale_home");
+                        localStorage.setItem("sale_home", JSON.stringify(data.data.sale));
+
                     }
-                    localStorage.removeItem("sale_home");
-                    localStorage.setItem("sale_home", JSON.stringify(data.data.sale));
 
                     show_data_to_front_end(data.data.data_customer_home, "firs_load");
                     set_sale_to_modal(data.data.sale);
@@ -148,13 +155,81 @@ function load_data_from_server() {
 }
 window.onload = load_data_from_server();
 
-function set_sale_to_modal(dt){
+function set_sale_to_modal(dt) {
+
     if (dt) {
         let select_sale = $('.sale').empty();
+        let select_status_filter = $('.filter-status').empty();
+        select_status_filter.append(`<option value = "">Lọc sale</option>`);
         dt.forEach(ele => {
-     
+
             let option = `<option value = "${ele.name}">${ele.name}</option>`;
+            let option_filter = `<option value="${ele.name}">${ele.name}</option>`;
             select_sale.append(option);
+            select_status_filter.append(option_filter);
         })
     }
+}
+
+// Event change select filter data
+$('.filter-status').on('change', e => {
+    let type_filter = $('.filter-status').find(":selected").val();
+    if (type_filter !== "") {
+        filter_status(type_filter);
+
+    }
+})
+
+function filter_status(kind_status) {
+    const data = JSON.parse(localStorage.getItem("data_home"));
+    let sale_home = JSON.parse(localStorage.getItem("sale_home"));
+
+    let jsonArr = [];
+    sale_home.forEach(ele=>{
+        if(ele.name === kind_status){
+            jsonArr = data.filter(item => item.sale == ele.name );
+        }
+
+    })
+    // Call function show data to client
+    show_data_to_front_end(jsonArr, "not");
+
+}
+
+// Event when search
+$('#key_search').keyup(e => {
+    e.stopImmediatePropagation();
+    let type_search = $('.type-search').find(":selected").val();
+    flter_data(e.target.value, type_search);
+
+});
+
+// Function filter data search
+function flter_data(keyword, type) {
+    const data = JSON.parse(localStorage.getItem("data_home"));
+    //   console.log(data);
+    let jsonArr = [];
+    if (type !== "") {
+        // search filter follow name customer
+
+        if (type === "name_cus") {
+            jsonArr = data.filter(item => (item.name).toLowerCase().includes(keyword));
+            // jsonArr.push(obj);
+        } // Search follow with Order ID
+        else if (type === "order_id") {
+            jsonArr = data.filter(item => (item.id).toLowerCase().includes(keyword));
+
+        } // Search follow with Phone
+        else if (type === "phone") {
+            jsonArr = data.filter(item => (item.phone).toLowerCase().includes(keyword));
+
+        }
+
+    }
+    if (keyword == "") {
+        jsonArr = data;
+    }
+
+    show_data_to_front_end(jsonArr);
+
 }
