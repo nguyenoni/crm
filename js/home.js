@@ -43,7 +43,7 @@ function show_data_to_front_end(data, type_show) {
                             <td>${item.address}</td>
                             <td>${item.sale ?item.sale : "Chưa phân cho sale"}</td>
                             <td>
-                            <a data-val="${item.row}" data-toggle="modal" data-target="#modal-edit-sale"><i class="far fa-edit edit-order" title="Phân phối cho sale xử lý"></i> </a>
+                            <a data-val="${item.index+1}" data-toggle="modal" data-target="#modal-edit-sale"><i class="far fa-edit edit-order" title="Phân phối cho sale xử lý"></i> </a>
                             </td>
                         </tr>
                         
@@ -73,7 +73,7 @@ function show_data_to_front_end(data, type_show) {
                         <td>${item.address}</td>
                         <td>${item.sale ? item.sale : ""}</td>
                         <td>
-                        <a data-val="${item.row}" data-toggle="modal" data-target="#modal-edit-sale"><i class="far fa-edit edit-order" title="Phân phối cho sale xử lý"></i> </a>
+                        <a data-val="${item.index+1}" data-toggle="modal" data-target="#modal-edit-sale"><i class="far fa-edit edit-order" title="Phân phối cho sale xử lý"></i> </a>
                         </td>
                             
                         </tr>
@@ -232,4 +232,74 @@ function flter_data(keyword, type) {
 
     show_data_to_front_end(jsonArr);
 
+}
+
+// Modal delete confirm
+$('#modal-edit-sale').on('show.bs.modal', function (event) {
+    let row_update = $(event.relatedTarget).data('val');
+    console.log($(event.relatedTarget).data('val'));
+    $('.row-update').val(row_update);
+
+    let data_find = JSON.parse(localStorage.getItem("data_home"));
+    let obj = data_find.filter(item => item.index === row_update-1);
+    $('.sale').val(obj[0].sale);
+
+});
+$("#modal-edit-sale").on('hide.bs.modal', function () {
+    $('input').val(null);
+    $('.alert').addClass('hide');
+    $('.alert').removeClass('show');
+    $('.alert').removeClass('alert-success');
+    $('.alert').removeClass('alert-danger');
+    load_data_from_server();
+
+});
+
+$('.btn-save').on('click', function(e){
+    e.preventDefault();
+    let sale = $('.sale').find(":selected").val();
+    
+
+    let dt = {
+        action: "UPDATE_SALE_PROCESS",
+        sale: sale.trim(),
+        row: $('.row-update').val()
+    }
+    do_action(dt);
+    
+
+})
+
+function do_action(data) {
+
+    if (data) {
+        $.ajax({
+            type: 'POST',
+            url: url_api,
+            dataType: 'json',
+            data: data,
+            success: function (data) {
+
+                if (data.status == 200) {
+                    $('input').val(null);
+                    $('.alert').removeClass('hide');
+                    $('.alert').removeClass('alert-danger');
+                    $('.alert').addClass('show alert-success');
+                    $('.message').text("");
+                    $('.message').text(data.message);
+                }
+                else {
+                    $('.alert').removeClass('hide');
+                    $('.alert').removeClass('alert-success');
+                    $('.alert').addClass('show alert-danger');
+                    $('.message').text("");
+                    $('.message').text(data.message);
+                    $('input').val(null);
+
+                }
+            }
+
+        });
+
+    }
 }
