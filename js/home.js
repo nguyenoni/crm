@@ -1,5 +1,8 @@
-const url_api = "https://script.google.com/macros/s/AKfycbwvWDwAkJu--B1sJfMS3jJSt2kKC2johynPPN9YxEtlXHuGAJl6/exec";
+const url_api = "https://script.google.com/macros/s/AKfycbwx_qBAyGwSa3Q6rhC6X55kXMsfZcgDUK0newb2pQ/exec";
 
+function loaded(){
+    $('body').addClass('loaded');
+  }
 // load sale to modal in page Home
 $(document).ready(function () {
     setTimeout(function () {
@@ -18,6 +21,8 @@ $('.btn-logout').on("click", function () {
     window.location.href = "https://nguyenoni.github.io/crm/login.html";
     // window.location.href = "/login.html";
 })
+
+
 
 
 function show_data_to_front_end(data, type_show) {
@@ -98,13 +103,22 @@ function show_data_to_front_end(data, type_show) {
         $('.filter-status').val("").change();
     }
     // show search, filter
-
+    loaded();
 }
 
+function check_role(){
+    let user = JSON.parse(sessionStorage.getItem("user"));
 
+    if(user.role === 2){
+        // window.location.href = "/customers.html";
+        window.location.href = "https://nguyenoni.github.io/crm/customers.html";
+    }
+    
+}
 
 // Get data from sheet bill order
 function load_data_from_server() {
+    check_role();
     let dt = {
         action: "GET_DATA_HOME",
     }
@@ -191,6 +205,9 @@ function filter_status(kind_status) {
         }
 
     })
+    if(kind_status === "Tất cả"){
+        jsonArr = data;
+    }
     // Call function show data to client
     show_data_to_front_end(jsonArr, "not");
 

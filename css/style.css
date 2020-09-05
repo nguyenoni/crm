@@ -41,6 +41,8 @@
 }
 /* Loading */
 
+
+
 #loader-wrapper {
     position: fixed;
     top: 0;
@@ -216,3 +218,4 @@ box-shadow: 0px 10px 13px -7px #000000, -1px 5px 7px -4px rgba(0,0,0,0);
     -webkit-box-shadow: -1px 5px 11px -4px #000000; 
 box-shadow: -1px 5px 11px -4px #000000;
   }
+

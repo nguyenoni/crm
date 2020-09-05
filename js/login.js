@@ -1,5 +1,5 @@
 
-const url_api = "https://script.google.com/macros/s/AKfycbwvWDwAkJu--B1sJfMS3jJSt2kKC2johynPPN9YxEtlXHuGAJl6/exec";
+const url_api = "https://script.google.com/macros/s/AKfycbwx_qBAyGwSa3Q6rhC6X55kXMsfZcgDUK0newb2pQ/exec";
 
 // Event click login
 $('.btn-login').on("click", function () {
@@ -48,8 +48,16 @@ function do_action(dt) {
                 if (data.status == 200) {
                     sessionStorage.removeItem("user");
                     sessionStorage.setItem("user", JSON.stringify(data.user));
-                    // window.location.href = "https://nguyenoni.github.io/crm/";
-                    window.location.href = "/";
+                    // 
+                    if(data.user.role === 1){
+                        // window.location.href = "/";
+                        window.location.href = "https://nguyenoni.github.io/crm/";
+                    }
+                    else{
+                        // window.location.href = "/customers.html";
+                        window.location.href = "https://nguyenoni.github.io/crm/customers.html";
+                    }
+                    
                 }
                 else {
                     $('.alert').removeClass('hide');

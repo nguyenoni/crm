@@ -1,4 +1,12 @@
 
+
+// Base url
+const url = "https://script.google.com/macros/s/AKfycbwx_qBAyGwSa3Q6rhC6X55kXMsfZcgDUK0newb2pQ/exec";
+
+function loaded(){
+    $('body').addClass('loaded');
+  }
+
 // Function show data to client
 function show_data_to_client(data, type_show = "aaa") {
 
@@ -50,7 +58,7 @@ function show_data_to_client(data, type_show = "aaa") {
         tbody.append(tr);
         $('.filter-status').val("").change();
     }
-
+    loaded();
 }
 // Modal delete confirm
 $('#modal-confirm').on('show.bs.modal', function (event) {
@@ -80,6 +88,8 @@ $('#exampleModal').on('show.bs.modal', function (event) {
     $('.name-sale').val(obj[0].name_sale_process);
     $('.row').val(obj[0].row);
     $('.name-product').val(obj[0].name_product);
+    $('.address').val(obj[0].adress);
+    $('.quantity').val(obj[0].quantity);
 });
 
 // Clear all value in modal when modal hide
@@ -160,8 +170,6 @@ $('#key_search').keyup(e => {
 });
 
 
-// Base url
-const url = "https://script.google.com/macros/s/AKfycbwvWDwAkJu--B1sJfMS3jJSt2kKC2johynPPN9YxEtlXHuGAJl6/exec";
 
 // Function get data from API
 function get_data() {
@@ -179,7 +187,7 @@ function get_data() {
             dataType: "json",
             data: dt,
             success: function (data) {
-
+                console.log(data);
                 if (data.status == 200) {
 
                     if (localStorage.getItem("data_customer") === null) {
@@ -221,6 +229,7 @@ window.onload = get_data();
 $('.btn-save').on("click", (e) => {
     // [data.customer_id, data.customer_name, data.kind_contact, data.sale_status, data.quantity,
     // data.fee_ship, data.money_box, data.sum_money_order, data.create_at, data.phone_number, data.address, data.note, data.email_user_edit]
+    
     e.preventDefault();
     let quantity = $('.quantity').find(":selected").val();
     let fee_ship = parseInt($('.fee-ship').find(":selected").val());
@@ -247,6 +256,7 @@ $('.btn-save').on("click", (e) => {
         price: price,
         name_product: $('.name-product').val(),
         status_order: "Đã được xử lý",
+        sheet_name: user.full_name,
 
     }
 

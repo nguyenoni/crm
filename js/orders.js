@@ -1,5 +1,8 @@
-// const url_api = "https://script.google.com/macros/s/AKfycbwvWDwAkJu--B1sJfMS3jJSt2kKC2johynPPN9YxEtlXHuGAJl6/exec";
+// const url_api = "https://script.google.com/macros/s/AKfycbwx_qBAyGwSa3Q6rhC6X55kXMsfZcgDUK0newb2pQ/exec";
 
+function loaded(){
+    $('body').addClass('loaded');
+  }
 // Show data to client
 function show_data_to_front_end(data, type_show) {
     // 
@@ -79,7 +82,7 @@ function show_data_to_front_end(data, type_show) {
         $('.filter-status').val("").change();
     }
     // show search, filter
-
+    loaded();
 }
 
 // Get data from sheet bill order
@@ -87,7 +90,8 @@ function load_data_from_server() {
     let user = JSON.parse(sessionStorage.getItem("user"));
     let dt = {
         action: "GET_BILL_ORDER",
-        email: user.email
+        email: user.email,
+        role: user.role
     }
 
     if (dt) {
@@ -196,7 +200,6 @@ $('#modal-edit-order').on('show.bs.modal', function (event) {
     const row = $(event.relatedTarget).data('val');
     const data = JSON.parse(localStorage.getItem("data_order"));
     let obj = data.filter(item => item.row === row);
-
     $('.row').val(row);
     $('.status').val(obj[0].status_order).change();
     $('.id-order').val(obj[0].ship_code);
@@ -311,6 +314,8 @@ function do_action(dt) {
             }
 
         });
+
+        load_data_from_server();
 
     }
 }
